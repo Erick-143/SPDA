@@ -1,0 +1,1 @@
+//funções para ligação com o prisma
