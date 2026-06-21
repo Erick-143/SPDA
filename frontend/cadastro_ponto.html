@@ -1,3 +1,137 @@
-<!--inserrção de um novo ponto no sistema antes da geração do qr code
-(ou depois, vou pensar melhor nisso)
--->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pontos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/forms.css">
+    <script src="./js/cadastro.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <span></span> Leitor <span>SPDA</span>
+        </div>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1>Cadastrar novo ponto</h1>
+            <a href="index.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+
+        <div class="formulario">
+            <form id="form-cadastro-ponto">
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="cliente">Cliente *</label>
+                        <select id="cliente" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Raizen (RZ)</option>
+                            <option value="2">Outro Cliente</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="unidade">Unidade *</label>
+                        <select id="unidade" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Planta Piracicaba</option>
+                            <option value="2">Planta Paulínia</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="area">Área *</label>
+                        <select id="area" required>
+                            <option value="">Selecione</option>
+                            <option value="TQ">Tanques (TQ)</option>
+                            <option value="ADM">Prédio administrativo (ADM)</option>
+                            <option value="MU">Prédio Multiuso (MU)</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="tipo_ponto">Tipo de ponto *</label>
+                        <select id="tipo_ponto" required>
+                            <option value="">Selecione</option>
+                            <option value="CI">Caixa de inspeção (CI)</option>
+                            <option value="DESC">Descida (DESC)</option>
+                            <option value="HC">Haste captora (HC)</option>
+                            <option value="EQP">Equipotencialização (EQP)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="localizacao">Localização *</label>
+                        <input type="text" id="localizacao" placeholder="Ex: próximo ao Tanque 09">
+
+                    </div>
+                    <div class="grup-form">
+                        <label for="criticidade">Criticidade *</label>
+                        <select id="criticidade" required>
+                            <option value="">Selecione</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Média</option>
+                            <option value="Baixa">Baixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="status">Status *</label>
+                        <select id="status" required>
+                            <option value="">Selecione</option>
+                            <option value="0">Inativo</option>
+                            <option value="1">Ativo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grup-form">
+                    <label for="descricao">Descrição do Ponto:</label>
+                    <textarea id="descricao" placeholder="Descreva as características do ponto de SPDA..."></textarea>
+                </div>
+
+                <div class="grup-form">
+                    <label for="observacao">Observações:</label>
+                    <textarea id="observacao" placeholder="Insira as observações referentes ao ponto..."></textarea>
+                </div>
+
+                <div class="grup-form">
+                    <label>Codigo único gerado automaticamente:</label>
+                    <div class="gerador-cod" id="codigo-gerado"><!--automatizar o processo--></div>
+                    <small style="color: #777; display: block; margin-top: 5px;">* O cógio é gerado automaticamente com
+                        base nas siglas escolhidas</small>
+                </div>
+
+                <div class="form-ac">
+                    <button type="button" class="btn-seg" onclick="limparFormulario()">Limpar</button>
+
+                    <button type="submit" class="btn-pri">
+                       <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20" height="20">
+                        Salvar Ponto</button>
+                </div>
+            </form>
+
+            <div id="mensagem-feedback"></div>
+        </div>
+    </main>
+</body>
+
+</html>
