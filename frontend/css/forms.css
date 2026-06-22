@@ -22,7 +22,7 @@ body{
     background-color: var(--backg-color);
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garante que ocupe a altura toda da tela */
+    min-height: 100vh; 
 }
 
 nav{
@@ -117,7 +117,7 @@ nav{
 }
 
 .grup-form{
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .grup-form label{
@@ -151,7 +151,7 @@ nav{
 .form-campo{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .form-ac{
@@ -208,6 +208,20 @@ nav{
     font-weight: 700;
     font-size: 1.2rem;
     margin-top: 10px;
+}
+
+.ponto-destaque {
+    background: #eaf4fa;
+    border: 2px solid var(--secondary-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.ponto-destaque label {
+    color: var(--primary-color);
+    font-weight: 700;
 }
 
 #mensagem-feedback{

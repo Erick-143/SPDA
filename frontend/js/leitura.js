@@ -1,1 +1,0 @@
-//manipulação da câmera para o qrcode 

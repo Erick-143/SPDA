@@ -1,1 +1,124 @@
-<!--onde dados técnicos são alimentados pelo inpetor de campo-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova inspeção</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/forms.css">
+    <script src="./js/insp.js"></script>
+</head>
+<body>
+     <nav>
+        <div class = "logo">
+         <span></span> Leitor <span>SPDA</span>
+        </div>
+        <div class = "usuario">
+            <span id = "user-name">Equipe 1</span>
+            <div class = "usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1> Registrar nova inspeção</h1>
+            <a href="index.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+
+        <div class="formulario">
+            <form id="form-nova-inspecao">
+
+                <div class="ponto-destaque">
+                    <label for="ponto_spda">Selecione o ponto de SPDA a ser inspecionado: </label>
+                    <select id="ponto_spda" required style="margin-top: 10px; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--cinza-borda);">
+                        <option value="">-- Selecione um ponto --</option>
+                        <option value="RZ-SPDA-TQ-CI-001">RZ-SPDA-TQ-CI-001 (Caixa de Inspeção - Tanques)</option>
+                        <option value="RZ-SPDA-ADM-DESC-001">RZ-SPDA-ADM-DESC-001 (Descida - Adm)</option>
+                        <option value="RZ-SPDA-MU-HC-001">RZ-SPDA-MU-HC-001 (Haste Captora - Multiuso)</option>
+                        <option value="RZ-SPDA-TQ-EQP-001">RZ-SPDA-TQ-EQP-001 (Equipotencialização - Tanques)</option>
+                    </select>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="data_inspecao">Data da inspeção *</label>
+                        <input type="date" id="data_inspecao" required>
+                    </div>
+                    <div class="grup-form">
+                        <label for="responsavel">Responsável *</label>
+                        <input type="text" id="responsavel" placeholder="Nome do inspetor" required>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="continuidade">Continuidade elétrica (mΩ):</label>
+                        <input type="number" id="continuidade" step="0.01" placeholder="Ex:38.5">
+                    </div>
+                    <div class="grup-form">
+                        <label for="resistencia">Resistência de aterramento (Ω):</label>
+                        <input type="number" id="resistencia" step="0.01" placeholder="Ex: 4.8">
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="condicao_visual">Condição visual:</label>
+                        <select id="condicao_visual" required>
+                            <option value="">Selecione</option>
+                            <option value="Boa">Boa</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Ruim">Ruim</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="oxidacao">Presença de oxidação?</label>
+                        <select id="oxidacao">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="conformidade">Situação de conformidade</label>
+                        <select id="conformidade" required>
+                            <option value="">Selecione</option>
+                            <option value="1">Conforme</option>
+                            <option value="0">Não conforme</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="necessidade-correcao">Necissade de correção?</label>
+                        <select id="necessidade-correcao">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grup-form">
+                    <label for="observacoes">Observações técnicas: </label>
+                    <textarea id="observacoes" placeholder="Descreva detalhes técnicos, anomalias ou recomendações..."></textarea>
+                </div>
+
+                <div class="form-ac">
+                    <button type="button" class="btn-seg" onclick="limparFormulário()">Limpar</button>
+                    <button type="submit" class="btn-pri">
+                        <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20" height="20">
+                        Registrar inspeção</button>
+                </div>
+            </form>
+
+            <div id="mensagem-feedback"></div>
+        </div>
+    </main>
+
+</body>
+</html>
