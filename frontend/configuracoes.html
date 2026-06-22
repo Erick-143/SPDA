@@ -1,1 +1,160 @@
-<!--sessoões de formulários-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/config.css">
+    <script src="./js/config.js"></script>
+</head>
+
+<body>
+
+    <body>
+        <nav>
+            <div class="logo">
+                <span></span> Leitor <span>SPDA</span>
+            </div>
+            <div class="usuario">
+                <span id="user-name">Equipe 1</span>
+                <div class="usuario-avatar">
+                    <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+                </div>
+            </div>
+        </nav>
+
+        <main class="principal">
+            <div class="titulo">
+                <h1>Configurações do sistema</h1>
+                <a href="index.html" class="btn-voltar">
+                    <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                    Voltar
+                </a>
+            </div>
+
+            <div class="formulario">
+
+                <div class="tab-cntd">
+                    <div class="tabs-nav">
+                        <button class="tab-btn active" data-tab="tab-clientes">Clientes</button>
+                        <button class="tab-btn" data-tab="tab-unidades">Unidades</button>
+                        <button class="tab-btn" data-tab="tab-areas">Áreas</button>
+                        <button class="tab-btn" data-tab="tab-tipos">Tipos de Ponto</button>
+                    </div>
+
+                    <div id="tab-clientes" class="tab-ctt active">
+                        <form id="form-cliente">
+                            <div class="form-campo">
+                                <div class="grup-form">
+                                    <label for="cliente_nome">Nome do Cliente *</label>
+                                    <input type="text" id="cliente_nome" placeholder="Ex:Raízen" required>
+
+                                </div>
+                                <div class="grup-form">
+                                    <label for="cliente_sigla">Sigla *</label>
+                                    <input type="text" id="cliente_sigla" placeholder="Ex: RZ" maxlength="5" required>
+                                </div>
+                            </div>
+                            <div class="form-ac">
+                                <button type="submit" class="btn-pri">Cadastrar Cliente</button>
+                            </div>
+                        </form>
+                        <div class="lista-itens" id="lista-clientes">
+                            <h3>Clientes cadastrados:</h3>
+                            <div id="clientes-render"></div>
+                        </div>
+                    </div>
+
+                    <div id="tab-unidades" class="tab-ctt">
+                        <form id="form-unidade">
+                            <div class="form-campo">
+                                <div class="grup-form">
+                                    <label for="unidade_cliente">Vincular ao Cliente *</label>
+                                    <select id="unidade_cliente" required>
+                                        <option value="">Selecione um cliente:</option>
+                                    </select>
+                                </div>
+                                <div class="grup-form">
+                                    <label for="unidade_nome">Nome da Unidade *</label>
+                                    <input type="text" id="unidade_nome" placeholder="Ex: Planta Piracicaba" required>
+
+                                </div>
+                            </div>
+                            <div class="form-ac">
+                                <button type="submit" class="btn-pri">Cadastrar unidade</button>
+                            </div>
+                        </form>
+                        <div class="lista-itens" id="lista-unidades">
+                            <h3>Unidades cadastradas:</h3>
+                            <div id="unidade-render"></div>
+                        </div>
+                    </div>
+
+                    <div id="tab-areas" class="tab-ctt">
+                        <form id="form-area">
+                            <div class="form-campo">
+                                <div class="grup-form">
+                                    <label for="area_unidade">Vincular à unidade *</label>
+                                    <select id="area_unidade" required>
+                                        <option value="">Selecione uma unidade</option>
+                                    </select>
+                                </div>
+                                <div class="grup-form">
+                                    <label for="area_nome">Nome da área *</label>
+                                    <input type="text" id="area_nome" placeholder="Ex: Tanques" required>
+
+                                </div>
+                            </div>
+                            <div class="form-campo" style="margin-top: 1rem;">
+                                <div class="grup-form">
+                                    <label for="area_sigla">Sigla da área *</label>
+                                    <input type="text" id="area_sigla" placeholder="Ex: TQ" maxlength="5" required>
+
+                                </div>
+                                <div class="grup-form">
+
+                                </div>
+                            </div>
+                            <div class="form-ac">
+                                <button type="submit" class="btn-pri">Cadastrar área</button>
+                            </div>
+                        </form>
+                        <div class="lista-itens" id="lista-areas">
+                            <h3>Áreas cadastradas:</h3>
+                            <div id="areas-render"></div>
+                        </div>
+                    </div>
+
+                    <div id="tab-tipos" class="tab-ctt">
+                        <form id="form-tipo">
+                            <div class="form-campo">
+                                <div class="grup-form">
+                                    <label for="tipo_nome">Nome do tipo *</label>
+                                    <input type="text" id="tipo_nome" placeholder="Ex: Caixa de inspeção no Solo" required>
+                                </div>
+                                <div class="grup-form">
+                                    <label for="tipo_sigla">Sigla *</label>
+                                    <input type="text" id="tipo_sigla" placeholder="Ex: CI" maxlength="5" required>
+                                </div>
+                            </div>
+                            <div class="form-ac">
+                                <button type="submit" class="btn-pri">Cadastrar tipo</button>
+                            </div>
+                        </form>
+                        <div class="lista-itens" id="lista-tipos">
+                            <h3>Tipos de pontos cadastrados:</h3>
+                            <div id="tipos-render"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="mensagem-feedback"></div>
+            </div>
+        </main>
+
+    </body>
+
+</html>
