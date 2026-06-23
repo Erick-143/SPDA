@@ -197,6 +197,49 @@ nav{
     margin-top: 5px;
 }
 
+/* --- ESTILOS DO LOGIN --- */
+.login-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.login-input:focus {
+    border-color: var(--primary-color);
+}
+
+.login-msg-erro {
+    color: #dc3545;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+    margin-bottom: 1rem;
+}
+
+.login-dica-banca {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+
 @media (max-width: 768px){
     .central{
         flex-direction: column;
@@ -216,3 +259,4 @@ nav{
         font-size: 1.2rem;
     }
 }
+

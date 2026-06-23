@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema SPDA</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- 1. Importa a inteligência de Login do Google -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script src="./js/seguranca.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+         <span></span> Leitor <span>SPDA</span>
+        </div>
+    </nav>
+
+    <main style="flex: 1; display: flex; justify-content: center; align-items: center; padding: 2rem;">
+        
+        <div class="cadastro" style="width: 100%; max-width: 400px; padding: 4rem 2rem; text-align: center;">
+            <h2 class="ind-titulo" style="margin-bottom: 1.5rem;">Acesso Restrito</h2>
+            
+            <p style="margin-bottom: 2.5rem; color: #666; font-size: 0.95rem; line-height: 1.5;">
+                Faça login utilizando a sua conta Google corporativa autorizada para acessar o painel.
+            </p>
+
+            <!-- 2. A Mágica do Google: Este código vai renderizar o botão automaticamente! -->
+            
+            <!-- ATENÇÃO: COLE SEU CLIENT ID ABAIXO -->
+            <div id="g_id_onload"
+                 data-client_id="629604508013-83t8kmdlt1gq798k92nrgdtlmm9e2g7t.apps.googleusercontent.com"
+                 data-callback="tratarRespostaDoGoogle"
+                 data-auto_prompt="false">
+            </div>
+            
+            <!-- Estilo do botão (Aqui você pode mudar o "theme" para "filled_blue" ou "outline") -->
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left"
+                 style="display: flex; justify-content: center;">
+            </div>
+
+            <p id="msg-erro" class="login-msg-erro" style="margin-top: 20px;">E-mail não autorizado.</p>
+        </div>
+        
+    </main>
+
+    <script>
+        // Função necessária para "descriptografar" o crachá virtual que o Google nos envia
+        function decodificarJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const payload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(payload);
+        }
+
+        // Função disparada automaticamente quando o usuário seleciona a conta do Google na janela
+        function tratarRespostaDoGoogle(response) {
+            
+            const dadosDoGoogle = decodificarJwt(response.credential);
+            const emailLogado = dadosDoGoogle.email.toLowerCase();
+            const msgErro = document.getElementById('msg-erro');
+
+            // --- LÓGICA DE ROTEAMENTO (GESTOR OU INSPETOR) ---
+            
+            // ATENÇÃO: COLOQUE SEU EMAIL DE GESTOR ABAIXO
+            if (emailLogado === 'gestorexemplo12@gmail.com') {
+                localStorage.setItem('usuario_id', 1); 
+                localStorage.setItem('perfil', 'gestor');
+                localStorage.setItem('nomeUsuario', dadosDoGoogle.name); // Salva o nome real da pessoa
+                localStorage.setItem('fotoPerfil', dadosDoGoogle.picture); // Salva a foto de perfil do Google!
+                window.location.href = 'index.html'; 
+            } 
+            
+            // ATENÇÃO: COLOQUE O EMAIL DE TESTE DO INSPETOR ABAIXO
+            else if (emailLogado === 'robertoelton37@gmail.com') {
+                localStorage.setItem('usuario_id', 2); 
+                localStorage.setItem('perfil', 'inspetor');
+                localStorage.setItem('nomeUsuario', dadosDoGoogle.name);
+                localStorage.setItem('fotoPerfil', dadosDoGoogle.picture);
+                window.location.href = 'leitura.html'; 
+            } 
+            
+            // Bloqueia se um intruso tentar logar
+            else {
+                msgErro.innerText = `O e-mail ${emailLogado} não tem permissão para acessar o sistema.`;
+                msgErro.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
