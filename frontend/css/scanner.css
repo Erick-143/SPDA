@@ -77,6 +77,14 @@ nav {
     width: 100%;
 }
 
+.titulo-image{
+    display: flex;         
+    align-items: center;  
+    gap: 15px;             
+    font-size: 1.8rem;    
+    color: var(--primary-color);
+}
+
 .titulo {
     display: flex;
     justify-content: space-between;
@@ -201,8 +209,8 @@ nav {
 }
 
 .btn-seg {
-    background-color: var(--cinza-leve);
-    color: var(--texto-negrito);
+    background-color: var(--primary-color);
+    color: var(--branco);
     padding: 12px 30px;
     border: none;
     border-radius: 30px;
@@ -216,7 +224,7 @@ nav {
 }
 
 .btn-seg:hover {
-    background: #d1d9e6;
+    background: var(--secondary-color);
     transform: translateY(-2px);
 }
 

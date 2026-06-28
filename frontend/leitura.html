@@ -14,7 +14,10 @@
 <body>
     <nav>
         <div class="logo">
-            <span></span> Leitor <span>SPDA</span>
+            <span></span> 
+            <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+            Leitor 
+            <span>SPDA</span>
         </div>
         <div class="usuario">
             <span id="user-name">Equipe 1</span>
@@ -26,7 +29,10 @@
 
     <main class="principal">
         <div class="titulo">
-            <h1> Escaneie o QR Code</h1>
+            <h1 class="titulo-image"> 
+                 <img src="./assets/images-leitura/scan-qr-code.png" alt="teclado" width="40" height="40">
+                Escaneie o QR Code
+            </h1>
             <a href="index.html" class="btn-voltar">
                 <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
                 Voltar
@@ -38,18 +44,18 @@
 
             <div id="carrega-camera">
                 <div class="passada"></div>
-                <p>Iniciando câmera</p>
+                <p>Iniciando câmera</p> 
             </div>
 
             <div id="resultado"></div>
 
             <div class="acao-scanner">
                 <button id="btn-ent-manual" class="btn-seg">
-                    <img src="./assets/images-cadastro-pt/move-left.png" alt="teclado" width="20" height="20">
+                    <img src="./assets/images-leitura/square-arrow-right-enter.png" alt="teclado" width="20" height="20">
                     Inserir código manualmente
                 </button>
                 <button id="reload-btn-scanner" class="btn-seg" style="display: none;">
-                    <!--inserir imagem de reload-->
+                    <img src="./assets/images-leitura/rotate-cw.png" alt="imagem reload" width="20" height="20">
                     Tentar Novamente
             </div>
 
@@ -62,5 +68,3 @@
 </body>
 
 </html>
-
-<!--leitura qr code-->
