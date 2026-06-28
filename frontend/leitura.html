@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./js/seguranca.js"></script>
+    <title>Scanner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/scanner.css">
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="./js/leitura.js" defer></script>
 </head>
+
 <body>
-    
+    <nav>
+        <div class="logo">
+            <span></span> Leitor <span>SPDA</span>
+        </div>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1> Escaneie o QR Code</h1>
+            <a href="index.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+
+        <div class="area-scanner">
+            <div id="leitura"></div>
+
+            <div id="carrega-camera">
+                <div class="passada"></div>
+                <p>Iniciando câmera</p>
+            </div>
+
+            <div id="resultado"></div>
+
+            <div class="acao-scanner">
+                <button id="btn-ent-manual" class="btn-seg">
+                    <img src="./assets/images-cadastro-pt/move-left.png" alt="teclado" width="20" height="20">
+                    Inserir código manualmente
+                </button>
+                <button id="reload-btn-scanner" class="btn-seg" style="display: none;">
+                    <!--inserir imagem de reload-->
+                    Tentar Novamente
+            </div>
+
+            <div class="int-scanner">
+                <p>Aponte a câmera para o QR Code do ponto SPDA</p>
+                <p class="msg-pqn">Autorize o acesso à câmera quando solicitado</p>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>
 
 <!--leitura qr code-->
