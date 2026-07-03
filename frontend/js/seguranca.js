@@ -16,7 +16,7 @@ else if (perfil) {
     
     // Lista de páginas que APENAS O GESTOR pode ver
     const paginasExclusivasGestor = [
-        'index.html', 
+        'painel_gestor.html', 
         'cadastro_ponto.html', 
         'configuracoes.html', 
         'lista_pontos.html'
@@ -36,3 +36,37 @@ function realizarLogout() {
     localStorage.clear();
     window.location.href = 'login.html';
 }
+
+// 5. Configurar o Mini Perfil Dinâmico em todas as páginas
+document.addEventListener('DOMContentLoaded', () => {
+    // Procura os elementos visuais no HTML
+    const userNameElement = document.getElementById('user-name');
+    const userAvatarElement = document.querySelector('.usuario-avatar img');
+    const usuarioDiv = document.querySelector('.usuario');
+
+    // Troca o texto estático pelo Nome que veio do Google
+    if (userNameElement && localStorage.getItem('nomeUsuario')) {
+        // Pega só o primeiro nome para o layout não quebrar
+        const primeiroNome = localStorage.getItem('nomeUsuario').split(' ')[0];
+        userNameElement.innerText = primeiroNome;
+    }
+
+    // Troca a foto genérica pela foto do Google
+    if (userAvatarElement && localStorage.getItem('fotoPerfil') && localStorage.getItem('fotoPerfil') !== "undefined") {
+        userAvatarElement.src = localStorage.getItem('fotoPerfil');
+        userAvatarElement.style.borderRadius = "50%"; // Deixa redondinha
+    }
+
+    // Transforma toda a área do perfil num botão de Sair seguro (Logout)
+    if (usuarioDiv) {
+        usuarioDiv.style.cursor = 'pointer';
+        usuarioDiv.title = "Clique para sair do sistema"; 
+        
+        usuarioDiv.addEventListener('click', () => {
+            const desejaSair = confirm("Deseja realmente sair do Leitor SPDA?");
+            if (desejaSair) {
+                realizarLogout();
+            }
+        });
+    }
+});

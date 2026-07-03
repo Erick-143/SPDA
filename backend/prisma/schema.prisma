@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider   = "prisma-client-js"
   engineType = "library"
 }
 
@@ -7,7 +7,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
 
 model area {
   id          Int           @id @default(autoincrement())
@@ -40,6 +39,9 @@ model inspecoes {
   necessidade_correcao    Boolean?
   conformidade            Boolean?
   observacoes             String?     @db.Text
+
+  foto_url                String?     @db.VarChar(255)
+
   pontos_spda             pontos_spda @relation(fields: [ponto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspecoes_ibfk_1")
   usuarios                usuarios    @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "inspecoes_ibfk_2")
 
@@ -59,10 +61,19 @@ model pontos_spda {
   status        Boolean?    @default(true)
   observacoes   String?     @db.Text
   inspecoes     inspecoes[]
+
+  unidade_id    Int                           // Relacionamento direto exigido (RF6)
+  foto_url      String?     @db.VarChar(255)  // Foto de referência do ponto (RF6)
+  qr_code_url   String?     @db.VarChar(255)  // Caminho do arquivo de imagem do QRCode gerado (RF7)
+
+  unidade       unidade     @relation(fields: [unidade_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pontos_spda_ibfk_4")
+
   cliente       cliente     @relation(fields: [cliente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pontos_spda_ibfk_1")
   area          area        @relation(fields: [area_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pontos_spda_ibfk_2")
   tipo_ponto    tipo_ponto  @relation(fields: [tipo_ponto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pontos_spda_ibfk_3")
 
+  // ADICIONAR INDEX (coloque junto com os outros @@index no final do model):
+  @@index([unidade_id], map: "unidade_id")
   @@index([area_id], map: "area_id")
   @@index([cliente_id], map: "cliente_id")
   @@index([tipo_ponto_id], map: "tipo_ponto_id")
@@ -80,6 +91,7 @@ model unidade {
   cliente_id Int
   nome       String  @db.VarChar(250)
   area       area[]
+    pontos_spda pontos_spda[] // Relação espelho indicando que a unidade terá vários pontos
   cliente    cliente @relation(fields: [cliente_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "unidade_ibfk_1")
 
   @@index([cliente_id], map: "cliente_id")
@@ -88,6 +100,9 @@ model unidade {
 model usuarios {
   id        Int         @id @default(autoincrement())
   nome      String      @db.VarChar(100)
+  email     String      @unique @db.VarChar(150)
+  senha     String?     @db.VarChar(255)
   perfil    String      @db.VarChar(50)
   inspecoes inspecoes[]
 }
+

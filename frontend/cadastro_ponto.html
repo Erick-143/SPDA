@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -14,10 +14,7 @@
 <body>
     <nav>
         <div class="logo">
-            <span></span>
-            <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
-            Leitor
-            <span>SPDA</span>
+            <span></span> Leitor <span>SPDA</span>
         </div>
         <div class="usuario">
             <span id="user-name">Equipe 1</span>
@@ -30,7 +27,7 @@
     <main class="principal">
         <div class="titulo">
             <h1>Cadastrar novo ponto</h1>
-            <a href="index.html" class="btn-voltar">
+            <a href="painel_gestor.html" class="btn-voltar">
                 <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
                 Voltar
             </a>
@@ -38,52 +35,44 @@
 
         <div class="formulario">
             <form id="form-cadastro-ponto">
+                
+                <!-- Linha 1: Cliente e Unidade -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="cliente">Cliente *</label>
                         <select id="cliente" required>
                             <option value="">Selecione</option>
-                            <option value="1">Raizen (RZ)</option>
-                            <option value="2">Outro Cliente</option>
                         </select>
                     </div>
                     <div class="grup-form">
                         <label for="unidade">Unidade *</label>
                         <select id="unidade" required>
                             <option value="">Selecione</option>
-                            <option value="1">Planta Piracicaba</option>
-                            <option value="2">Planta Paulínia</option>
                         </select>
                     </div>
                 </div>
 
+                <!-- Linha 2: Área e Tipo de Ponto -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="area">Área *</label>
                         <select id="area" required>
                             <option value="">Selecione</option>
-                            <option value="TQ">Tanques (TQ)</option>
-                            <option value="ADM">Prédio administrativo (ADM)</option>
-                            <option value="MU">Prédio Multiuso (MU)</option>
                         </select>
                     </div>
                     <div class="grup-form">
                         <label for="tipo_ponto">Tipo de ponto *</label>
                         <select id="tipo_ponto" required>
                             <option value="">Selecione</option>
-                            <option value="CI">Caixa de inspeção (CI)</option>
-                            <option value="DESC">Descida (DESC)</option>
-                            <option value="HC">Haste captora (HC)</option>
-                            <option value="EQP">Equipotencialização (EQP)</option>
                         </select>
                     </div>
                 </div>
 
+                <!-- Linha 3: Localização e Criticidade -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="localizacao">Localização *</label>
-                        <input type="text" id="localizacao" placeholder="Ex: próximo ao Tanque 09">
-
+                        <input type="text" id="localizacao" placeholder="Ex: próximo ao Tanque 09" required>
                     </div>
                     <div class="grup-form">
                         <label for="criticidade">Criticidade *</label>
@@ -96,6 +85,7 @@
                     </div>
                 </div>
 
+                <!-- Linha 4: Status -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="status">Status *</label>
@@ -107,6 +97,7 @@
                     </div>
                 </div>
 
+                <!-- Textos -->
                 <div class="grup-form">
                     <label for="descricao">Descrição do Ponto:</label>
                     <textarea id="descricao" placeholder="Descreva as características do ponto de SPDA..."></textarea>
@@ -117,20 +108,20 @@
                     <textarea id="observacao" placeholder="Insira as observações referentes ao ponto..."></textarea>
                 </div>
 
+                <!-- Exibição do Código -->
                 <div class="grup-form">
                     <label>Codigo único gerado automaticamente:</label>
                     <div class="gerador-cod" id="codigo-gerado"><!--automatizar o processo--></div>
-                    <small style="color: #777; display: block; margin-top: 5px;">* O cógio é gerado automaticamente com
-                        base nas siglas escolhidas</small>
+                    <small style="color: #777; display: block; margin-top: 5px;">* O código é gerado automaticamente pelo servidor com base nas siglas escolhidas</small>
                 </div>
 
+                <!-- Botões -->
                 <div class="form-ac">
-                    <button type="button" class="btn-seg" onclick="limparFormulario()">Limpar</button>
-
+                    <button type="button" class="btn-seg" onclick="document.getElementById('form-cadastro-ponto').reset(); document.getElementById('codigo-gerado').innerText = '';">Limpar</button>
                     <button type="submit" class="btn-pri">
-                        <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20"
-                            height="20">
-                        Salvar Ponto</button>
+                       <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20" height="20">
+                        Salvar Ponto
+                    </button>
                 </div>
             </form>
 

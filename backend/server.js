@@ -11,7 +11,8 @@ const dashboardRoutes = require('./src/routes/dashboardRoutes.js');
 const areaRoutes = require('./src/routes/areaRoutes');
 const pontoRoutes = require('./src/routes/pontoRoutes.js');
 const inspecaoRoutes = require('./src/routes/inspecaoRoutes.js');
-
+const authRoutes = require('./src/routes/authRoutes.js');
+const auxiliarRoutes = require('./src/routes/auxiliarRoutes.js');
 
 const app = express();
 
@@ -32,6 +33,9 @@ app.use('/api/inspecoes', inspecaoRoutes);
 
 app.use('/api/dashboard', dashboardRoutes);
 
+app.use('/api/auth', authRoutes);
+
+app.use('/api/auxiliar', auxiliarRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
