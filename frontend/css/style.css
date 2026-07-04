@@ -16,7 +16,7 @@
 
 body{
     background-color: var(--backg-color);
-    color: var(--texto-negrito);
+    color: #01257D;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -131,7 +131,7 @@ nav{
     transition: all 0.3s ease;
     cursor: pointer;
     text-decoration: none;
-    color: var(--texto-negrito);
+    color: #01257D;
     border: 1px solid transparent;
 }
 
