@@ -1,9 +1,12 @@
-// src/routes/areaRoutes.js
 const express = require('express');
 const router = express.Router();
-const areaController = require('../controllers/areaController');
+const { listarAreas, criarArea, excluirArea, calcularImpactoArea, listarAreasInativas, reativarArea } = require('../controllers/areaController');
 
-// Quando acessarem essa rota com o método GET, rodamos a função getAreas
-router.get('/', areaController.getAreas);
+router.get('/', listarAreas);
+router.get('/inativos', listarAreasInativas);
+router.get('/:id/impacto', calcularImpactoArea);
+router.post('/', criarArea);
+router.delete('/:id', excluirArea);
+router.put('/:id/reativar', reativarArea);
 
 module.exports = router;

@@ -14,8 +14,8 @@ const inspecaoRoutes = require('./src/routes/inspecaoRoutes.js');
 const authRoutes = require('./src/routes/authRoutes.js');
 const auxiliarRoutes = require('./src/routes/auxiliarRoutes.js');
 const clienteRoutes = require('./src/routes/clienteRoutes.js');
-
-
+const unidadeRoutes = require('./src/routes/unidadeRoutes.js');
+const tipoPontoRoutes = require('./src/routes/tipoPontoRoutes.js');
 
 const app = express();
 
@@ -41,6 +41,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/auxiliar', auxiliarRoutes);
 
 app.use('/api/clientes', clienteRoutes);
+
+app.use('/api/unidades', unidadeRoutes);
+
+app.use('/api/tipos', tipoPontoRoutes);
 
 
 const PORT = process.env.PORT || 3000;
