@@ -5,10 +5,21 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Iniciando injeção de Mock Data para a banca...");
 
-  // 1. Criar um usuário Inspetor (caso não exista)
   let inspetor = await prisma.usuarios.findFirst({ where: { perfil: 'Inspetor de Campo' } });
   if (!inspetor) {
     inspetor = await prisma.usuarios.create({ data: { nome: 'Carlos Silva', perfil: 'Inspetor de Campo' } });
+  }
+
+  // 1.5. Criar o usuário Gestor Padrão para a equipe testar sem problemas
+  let gestor = await prisma.usuarios.findUnique({ where: { email: 'gestorexemplo12@gmail.com' } });
+  if (!gestor) {
+    gestor = await prisma.usuarios.create({ 
+      data: { 
+        nome: 'Gestor Teste', 
+        email: 'gestorexemplo12@gmail.com', 
+        perfil: 'gestor' 
+      } 
+    });
   }
 
   // 2. Pega as configurações base (O Cliente, a Área e o Tipo que criamos no primeiro teste)

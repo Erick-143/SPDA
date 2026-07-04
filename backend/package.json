@@ -4,7 +4,7 @@
   "main": ".js",
   "scripts": {
     "start": "node server.js",
-    "setup": "npm install && npx prisma db push --force-reset && node seedMock.js"
+    "setup": "npm install && npx prisma db push --force-reset && node seed.js && node seedMock.js"
   },
   "keywords": [],
   "author": "",
