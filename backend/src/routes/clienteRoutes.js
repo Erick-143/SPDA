@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.express.Router();
+const router = express.Router();
 const { listarClientes, criarCliente, excluirCliente, listarClientesInativos, reativarCliente } = require('../controllers/clienteController');
 
 router.get('/', listarClientes);

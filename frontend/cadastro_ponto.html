@@ -7,6 +7,12 @@
     <title>Cadastro de Pontos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/forms.css">
+    
+     <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    
+    <!-- Seus scripts (ATENÇÃO: qrcode.js deve vir ANTES de cadastro.js) -->
+    <script src="./js/qrcode.js"></script>
     <script src="./js/cadastro.js"></script>
     <script src="./js/seguranca.js"></script>
 </head>
@@ -52,7 +58,7 @@
                     </div>
                 </div>
 
-                <!-- Linha 2: Área e Tipo de Ponto -->
+                
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="area">Área *</label>
