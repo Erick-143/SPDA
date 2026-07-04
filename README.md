@@ -42,3 +42,6 @@ npm start
 ### 4. Como Testar o Login do Google?
 Lembre-se: Após rodar o setup, o banco estará com os dados simulados (Mock). Para conseguir logar com o seu e-mail do Google, você precisará adicionar o seu e-mail na tabela `usuarios`.
 Para fazer isso, abra um terminal na pasta `backend` e digite `npx prisma studio`. Adicione seu nome, o seu e-mail exato do Google, e a palavra "gestor" no perfil. Pronto! Pode logar na interface web.
+
+# Emails usados
+- gestorexemplo12@gmail.com senha: 1@gestor12345

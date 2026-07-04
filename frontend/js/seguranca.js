@@ -10,24 +10,24 @@ const paginasPublicas = ['landingPage.html', 'login.html', 'inicio.html'];
 // Se não está logado e tenta acessar página privada -> Chuta pro Login
 if (!perfil && !paginasPublicas.includes(paginaAtual)) {
     window.location.href = 'login.html';
-} 
+}
 else if (perfil) {
     // 3. Regras de Ouro (Proteção de Acesso)
-    
+
     // Lista de páginas que APENAS O GESTOR pode ver
     const paginasExclusivasGestor = [
-        'painel_gestor.html', 
-        'cadastro_ponto.html', 
-        'configuracoes.html', 
+        'painel_gestor.html',
+        'cadastro_ponto.html',
+        'configuracoes.html',
         'lista_pontos.html'
     ];
-    
+
     // Se um Inspetor tentar invadir uma página de Gestor:
     if (perfil === 'inspetor' && paginasExclusivasGestor.includes(paginaAtual)) {
         alert("🔒 Acesso Negado: Esta área é restrita a Gestores.");
         window.location.href = 'leitura.html'; // Joga ele de volta pra câmera
     }
-    
+
     // Observação: O Gestor tem acesso livre a todas as telas (incluindo escanear e laudo)
 }
 
@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Transforma toda a área do perfil num botão de Sair seguro (Logout)
     if (usuarioDiv) {
         usuarioDiv.style.cursor = 'pointer';
-        usuarioDiv.title = "Clique para sair do sistema"; 
-        
+        usuarioDiv.title = "Clique para sair do sistema";
+
         usuarioDiv.addEventListener('click', () => {
             const desejaSair = confirm("Deseja realmente sair do Leitor SPDA?");
             if (desejaSair) {
