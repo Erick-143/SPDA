@@ -21,12 +21,17 @@ const getPontos = async (req, res) => {
 // Função para criar um novo ponto de SPDA com Código Inteligente
 const createPonto = async (req, res) => {
   try {
-    const { cliente_id, area_id, tipo_ponto_id, localizacao, descricao, criticidade } = req.body;
+    const { cliente_id, unidade_id, area_id, tipo_ponto_id, localizacao, descricao, criticidade } = req.body;
     
     // 1. Busca as informações simultaneamente para o código único
     const cliente = await prisma.cliente.findUnique({ where: { id: cliente_id } });
     const area = await prisma.area.findUnique({ where: { id: area_id } });
     const tipo = await prisma.tipo_ponto.findUnique({ where: { id: tipo_ponto_id } });
+    const unidadeId = unidade_id || area?.unidade_id;
+
+    if (!cliente || !area || !tipo || !unidadeId) {
+      return res.status(400).json({ erro: "Cliente, unidade, área ou tipo de ponto inválido." });
+    }
 
     // 2. Extrai as siglas
     const siglaCli = cliente?.sigla || 'CLI';
@@ -41,6 +46,7 @@ const createPonto = async (req, res) => {
       data: {
         codigo_unico: `${baseCodigo}-TEMP-${Date.now()}`,
         cliente_id,
+        unidade_id: unidadeId,
         area_id,
         tipo_ponto_id,
         localizacao,

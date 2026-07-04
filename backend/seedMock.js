@@ -7,7 +7,13 @@ async function main() {
 
   let inspetor = await prisma.usuarios.findFirst({ where: { perfil: 'Inspetor de Campo' } });
   if (!inspetor) {
-    inspetor = await prisma.usuarios.create({ data: { nome: 'Carlos Silva', perfil: 'Inspetor de Campo' } });
+    inspetor = await prisma.usuarios.create({
+      data: {
+        nome: 'Carlos Silva',
+        email: 'inspetorexemplo12@gmail.com',
+        perfil: 'Inspetor de Campo'
+      }
+    });
   }
 
   // 1.5. Criar o usuário Gestor Padrão para a equipe testar sem problemas
@@ -24,10 +30,11 @@ async function main() {
 
   // 2. Pega as configurações base (O Cliente, a Área e o Tipo que criamos no primeiro teste)
   const cliente = await prisma.cliente.findFirst();
+  const unidade = await prisma.unidade.findFirst();
   const area = await prisma.area.findFirst();
   const tipo = await prisma.tipo_ponto.findFirst();
 
-  if (!cliente || !area || !tipo) {
+  if (!cliente || !unidade || !area || !tipo) {
     console.error("Erro: Banco vazio! Rode o arquivo seed.js anterior primeiro.");
     return;
   }
@@ -43,6 +50,7 @@ async function main() {
       data: {
         codigo_unico: `${baseCodigo}-TEMP-MOCK-${i}`,
         cliente_id: cliente.id,
+        unidade_id: unidade.id,
         area_id: area.id,
         tipo_ponto_id: tipo.id,
         localizacao: `Setor Industrial - Quadrante ${i}`,
