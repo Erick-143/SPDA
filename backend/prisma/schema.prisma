@@ -23,7 +23,7 @@ model cliente {
   id          Int           @id @default(autoincrement())
   nome        String?       @db.VarChar(100)
   sigla       String?       @db.VarChar(100)
-  ativo       Boolean       @default(true) // NOVO CAMPO ADICIONADO AQUI
+  ativo       Boolean       @default(true) 
   pontos_spda pontos_spda[]
   unidade     unidade[]
 }
