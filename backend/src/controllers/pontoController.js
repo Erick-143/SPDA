@@ -5,6 +5,13 @@ const prisma = require('../prismaClient');
 const getPontos = async (req, res) => {
   try {
     const pontos = await prisma.pontos_spda.findMany({
+          where: {
+        ativo: true,
+        cliente: { ativo: true },
+        unidade: { ativo: true },
+        area: { ativo: true },
+        tipo_ponto: { ativo: true }
+      },
       include: {
         cliente: true,
         unidade: true,    
@@ -101,8 +108,63 @@ const buscarPorCodigo = async (req, res) => {
   }
 };
 
+// --- NOVAS FUNÇÕES PARA ARQUIVO MORTO ---
+const inativarPonto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.pontos_spda.update({
+      where: { id: Number(id) },
+      data: { ativo: false }
+    });
+    res.json({ mensagem: "Ponto inativado com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ erro: "Erro ao inativar ponto." });
+  }
+};
+
+const reativarPonto = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.pontos_spda.update({
+      where: { id: Number(id) },
+      data: { ativo: true }
+    });
+    res.json({ mensagem: "Ponto reativado com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ erro: "Erro ao reativar ponto." });
+  }
+};
+
+const listarPontosInativos = async (req, res) => {
+  try {
+    const pontos = await prisma.pontos_spda.findMany({
+      where: {
+        OR: [
+          { ativo: false },
+          { cliente: { ativo: false } },
+          { unidade: { ativo: false } },
+          { area: { ativo: false } },
+          { tipo_ponto: { ativo: false } }
+        ]
+      },
+      include: {
+        cliente: true,
+        unidade: true,
+        area: true,
+        tipo_ponto: true
+      }
+    });
+    res.json(pontos);
+  } catch (error) {
+    res.status(500).json({ erro: "Erro ao buscar pontos inativos." });
+  }
+};
+
 module.exports = {
   getPontos,
   createPonto,
-  buscarPorCodigo
+  buscarPorCodigo,
+  inativarPonto,
+  reativarPonto,
+  listarPontosInativos
 };

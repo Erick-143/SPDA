@@ -16,7 +16,7 @@ async function carregarDadosDaFicha(codigo) {
     try {
         // 2. Consulta a rota buscarPorCodigo do backend
         const res = await fetch(`http://localhost:3000/api/pontos/buscar-codigo/${codigo}`);
-        
+
         if (!res.ok) {
             if (res.status === 404) {
                 alert('Ponto de SPDA não encontrado no banco de dados.');
@@ -28,16 +28,16 @@ async function carregarDadosDaFicha(codigo) {
         }
 
         const ponto = await res.json();
-        
+
         // 3. Preenche os dados básicos e características do Ponto
         document.getElementById('ponto-codigo').innerText = ponto.codigo_unico;
         document.getElementById('ponto-area').innerText = `${ponto.area?.nome || '---'} (${ponto.area?.sigla || ''})`;
         document.getElementById('ponto-unidade').innerText = ponto.unidade?.nome || 'Planta Principal';
         document.getElementById('ponto-localizacao').innerText = ponto.localizacao || 'Sem descrição cadastrada';
-        
+
         document.getElementById('ponto-tipo').innerText = `${ponto.tipo_ponto?.nome || '---'} (${ponto.tipo_ponto?.sigla || ''})`;
         document.getElementById('ponto-cliente').innerText = `${ponto.cliente?.nome || '---'} (${ponto.cliente?.sigla || ''})`;
-        
+
         const campoCriticidade = document.getElementById('ponto-criticidade');
         campoCriticidade.innerText = ponto.criticidade || 'Baixa';
         if (ponto.criticidade === 'Alta') {
@@ -62,7 +62,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
     const corpoTabela = document.getElementById('corpo-tabela-historico');
     const totalRegistros = document.getElementById('total-registros');
     corpoTabela.innerHTML = '';
-    
+
     totalRegistros.innerText = `Total: ${inspecoes.length} registros`;
 
     if (inspecoes.length > 0) {
@@ -79,12 +79,12 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         // 2. Preenche as linhas da tabela de Histórico
         inspecoes.forEach(insp => {
             const tr = document.createElement('tr');
-            
+
             // Tratamento do status
             const isConforme = insp.conformidade === true;
             const statusTexto = isConforme ? 'Conforme' : 'Não Conforme';
             const statusClass = isConforme ? 'conforme' : 'nao-conforme';
-            
+
             if (!isConforme) {
                 tr.style.background = '#fff5f5';
             }
@@ -111,7 +111,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         document.getElementById('medicao-continuidade').innerText = '---';
         document.getElementById('medicao-resistencia').innerText = '---';
         document.getElementById('medicao-visual').innerText = '---';
-        
+
         corpoTabela.innerHTML = `
             <tr>
                 <td colspan="6" style="text-align: center; color: #777; padding: 20px;">
@@ -135,7 +135,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         const isConforme = inspecoes[0].conformidade === true;
         conformidadeTexto = isConforme ? 'Conforme' : 'Não Conforme';
         conformidadeBadge = isConforme ? 'conforme' : 'nao-conforme';
-        conformidadeIcon = 'check.png'; 
+        conformidadeIcon = 'check.png';
     }
 
     statusContainer.innerHTML = `
@@ -147,6 +147,38 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
             <img src="./assets/imagem-ficha/${pontoStatusIcon}" alt="status" width="20" height="20">
             ${pontoStatusTexto}
         </span>
-        <a href="nova_insp.html?codigo_ponto=${encodeURIComponent(codigoPonto)}" class="btn-nova-inspecao">Nova Inspeção</a>
+        <a href="nova_insp.html?codigo_ponto=${encodeURIComponent(codigoPonto)}" class="btn-nova-inspecao" id="btn-nova-insp">Nova Inspeção</a>
     `;
+}
+
+// 6. Função para Gerar PDF do Laudo
+function gerarPDF() {
+    // Esconde os botões para eles não saírem impressos no PDF
+    const botoes = document.getElementById('botoes-impressao');
+    const btnVoltar = document.querySelector('.btn-voltar');
+    const btnNovaInsp = document.getElementById('btn-nova-insp');
+    
+    if (botoes) botoes.style.display = 'none';
+    if (btnVoltar) btnVoltar.style.display = 'none';
+    if (btnNovaInsp) btnNovaInsp.style.display = 'none';
+
+    // Pega o conteúdo completo e o código do ponto para nomear o arquivo
+    const elemento = document.getElementById('conteudo-pdf');
+    const codigo = document.getElementById('ponto-codigo').innerText || 'SPDA';
+
+    // Configurações do PDF (Qualidade, formato, margem)
+    const opt = {
+        margin:       10,
+        filename:     `Laudo_${codigo}.pdf`,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Manda gerar o PDF e depois devolve os botões para a tela
+    html2pdf().set(opt).from(elemento).save().then(() => {
+        if (botoes) botoes.style.display = 'flex';
+        if (btnVoltar) btnVoltar.style.display = 'flex';
+        if (btnNovaInsp) btnNovaInsp.style.display = 'inline-flex';
+    });
 }

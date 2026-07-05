@@ -118,18 +118,44 @@ function renderizarGrid(pontos) {
                     </div>
                 </div>
                 
-                <div class="card-footer">
+                                <div class="card-footer">
                     <span class="status-badge ${statusClass}">${statusTexto}</span>
                     
-                    <a href="ficha_ponto.html?codigo=${ponto.codigo_unico}" class="btn-visualizar">
-                        <img src="./assets/imagem-listagem/eye.png" alt="Visualizar" width="14" height="14">
-                        Visualizar
-                    </a>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                                               <button onclick="inativarPonto(${ponto.id}, '${ponto.codigo_unico}')" style="background-color: #e74c3c; color: white; padding: 8px 15px; border-radius: 20px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; font-size: 0.9rem;" title="Inativar Ponto">
+                            Inativar
+                        </button>
+                        
+                        <a href="ficha_ponto.html?codigo=${ponto.codigo_unico}" class="btn-visualizar">
+                            <img src="./assets/imagem-listagem/eye.png" alt="Visualizar" width="14" height="14">
+                            Visualizar
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
         grid.innerHTML += cardHTML;
     });
+}
+
+
+// 3.5. Lógica para Inativar o Ponto (Mandar para Lixeira)
+async function inativarPonto(id, codigo) {
+    const confirmar = confirm(`Atenção!\nDeseja realmente inativar o ponto ${codigo}?\nEle será movido para o Arquivo Morto.`);
+    if (!confirmar) return;
+
+    try {
+        const res = await fetch(`http://localhost:3000/api/pontos/${id}/inativar`, { method: 'PUT' });
+        if (res.ok) {
+            alert('Ponto removido com sucesso!');
+            buscarPontosDoBanco(); // Recarrega a tela
+        } else {
+            alert('Erro ao inativar o ponto.');
+        }
+    } catch (error) {
+        console.error('Erro de conexão:', error);
+        alert('Erro ao se comunicar com o servidor.');
+    }
 }
 
 // 4. Lógica de Filtragem Reativa e Precisa

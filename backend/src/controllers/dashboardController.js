@@ -3,33 +3,37 @@ const prisma = require('../prismaClient');
 
 const getResumo = async (req, res) => {
   try {
-    // 1. Conta o Total de Pontos Cadastrados
     const totalPontos = await prisma.pontos_spda.count();
 
-    // 2. Conta quantas inspeções deram "Conforme"
     const inspecoesConformes = await prisma.inspecoes.count({
       where: { conformidade: true }
     });
 
-    // 3. Conta quantas deram "Não Conforme"
     const inspecoesNaoConformes = await prisma.inspecoes.count({
       where: { conformidade: false }
     });
 
-    // 4. Pega as últimas 5 inspeções para a "Evolução Temporal"
+    // Novidade: Calculando a média direto no banco de dados!
+    const mediaObj = await prisma.inspecoes.aggregate({
+      _avg: { resistencia_aterramento: true }
+    });
+    const mediaResistencia = mediaObj._avg.resistencia_aterramento 
+                           ? parseFloat(mediaObj._avg.resistencia_aterramento).toFixed(2)
+                           : "0.00";
+
     const ultimasInspecoes = await prisma.inspecoes.findMany({
       take: 5,
       orderBy: { data_inspecao: 'desc' },
       include: { pontos_spda: true }
     });
 
-    // Devolve tudo mastigado em um único JSON para o Chart.js do Frontend brilhar
     res.json({
       totalPontos,
       conformidade: {
         conformes: inspecoesConformes,
         naoConformes: inspecoesNaoConformes
       },
+      mediaResistencia,
       ultimasInspecoes
     });
   } catch (error) {

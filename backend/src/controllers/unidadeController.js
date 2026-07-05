@@ -55,10 +55,16 @@ const excluirUnidade = async (req, res) => {
   }
 };
 // Arquivo Morto: Listar Inativas
+// Arquivo Morto: Listar Inativas
 const listarUnidadesInativas = async (req, res) => {
   try {
     const unidades = await prisma.unidade.findMany({
-      where: { ativo: false },
+      where: {
+        OR: [
+          { ativo: false },
+          { cliente: { ativo: false } }
+        ]
+      },
       include: { cliente: true }
     });
     res.json(unidades);
@@ -66,6 +72,7 @@ const listarUnidadesInativas = async (req, res) => {
     res.status(500).json({ erro: "Erro ao buscar inativas." });
   }
 };
+
 // Reativar
 const reativarUnidade = async (req, res) => {
   try {

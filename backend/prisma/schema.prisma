@@ -61,6 +61,7 @@ model pontos_spda {
   descricao     String?     @db.Text
   criticidade   String?     @db.VarChar(50)
   status        Boolean?    @default(true)
+  ativo         Boolean     @default(true)
   observacoes   String?     @db.Text
   inspecoes     inspecoes[]
 

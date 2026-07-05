@@ -45,6 +45,10 @@
                         style="margin-top: 10px; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--cinza-borda);">
                         <option value="">-- Carregando pontos... --</option>
                     </select>
+
+                    <!-- NOVA CAIXA DE RESUMO AQUI -->
+                    <div id="resumo_ponto" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-left: 4px solid #0056b3; border-radius: 8px; display: none; line-height: 1.6;">
+                    </div>
                 </div>
 
                 <div class="form-campo">
@@ -53,8 +57,8 @@
                         <input type="date" id="data_inspecao" required>
                     </div>
                     <div class="grup-form">
-                        <label for="responsavel">Responsável *</label>
-                        <input type="text" id="responsavel" placeholder="Nome do inspetor" required>
+                        <label>Responsável (Automático)</label>
+                        <input type="text" id="responsavel_exibicao" disabled style="background-color: #e9ecef; cursor: not-allowed; font-weight: bold; color: #555;">
                     </div>
                 </div>
 
