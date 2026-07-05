@@ -37,11 +37,7 @@ const createPonto = async (req, res) => {
     const siglaCli = cliente?.sigla || 'CLI';
     const siglaAre = area?.sigla || 'ARE';
     const siglaTip = tipo?.sigla || 'TIP';
-
-    // 3. Monta a base do código no padrão EXATO da banca (Ex: RZ-SPDA-TQ-CI)
     const baseCodigo = `${siglaCli}-SPDA-${siglaAre}-${siglaTip}`;
-
-    // 4. Cria o ponto com um sufixo temporário (para o banco gerar o ID)
     const novoPonto = await prisma.pontos_spda.create({
       data: {
         codigo_unico: `${baseCodigo}-TEMP-${Date.now()}`,
@@ -55,7 +51,6 @@ const createPonto = async (req, res) => {
       }
     });
 
-    // 5. Atualiza o ponto trocando o "TEMP" pelo ID sequencial (Ex: RZ-SPDA-TQ-CI-001)
     const codigoDefinitivo = `${baseCodigo}-${String(novoPonto.id).padStart(3, '0')}`;
     
     const pontoFinal = await prisma.pontos_spda.update({
@@ -70,8 +65,35 @@ const createPonto = async (req, res) => {
   }
 };
 
-// Exportando TUDO para as rotas poderem enxergar!
+const buscarPorCodigo = async (req, res) => {
+  try {
+    const { codigo } = req.params;
+
+    const ponto = await prisma.pontos_spda.findFirst({
+      where: {
+        codigo_unico: codigo
+      },
+      include: {
+        cliente: true,
+        area: true,
+        tipo_ponto: true
+      }
+    });
+
+    if (!ponto) {
+      return res.status(404).json({ erro: "Ponto não encontrado no banco de dados." });
+    }
+
+    return res.status(200).json(ponto);
+
+  } catch (error) {
+    console.error("Erro ao buscar ponto por código:", error);
+    return res.status(500).json({ erro: "Erro interno no servidor ao buscar o ponto." });
+  }
+};
+
 module.exports = {
   getPontos,
-  createPonto
-};
+  createPonto,
+  buscarPorCodigo 
+}; 

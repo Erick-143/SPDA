@@ -7,20 +7,30 @@ function criarContainerQR(codigoPonto) {
     container.id = 'qr-code-container';
     container.className = 'spda-qr-wrapper';
     
-    container.innerHTML = `
+container.innerHTML = `
         <div class="spda-qr-content">
             <div class="spda-qr-info">
-                <h4>📱 QR Code do Ponto</h4>
+                <h4 style="display: flex; align-items: center; gap: 8px;">
+                    <img src="./assets/imagem-qrcode/scan-qr-code.png" alt="ícone qr" width="20" height="20">
+                    QR Code do Ponto
+                </h4>
                 <p><strong>Código:</strong> ${codigoPonto}</p>
             </div>
-            <div class="spda-qr-code" id="qrcode"></div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
-                <button onclick="baixarQRCode()" class="spda-btn-qr spda-btn-qr-primary">
-                    📥 Baixar
+            
+            <div class="spda-qr-code" id="qrcode" style="margin: 15px auto; display: flex; justify-content: center;"></div>
+            
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; width: 100%;">
+                
+                <button type="button" onclick="baixarQRCode()" class="spda-btn-qr spda-btn-qr-primary" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                    <img src="./assets/imagem-qrcode/download.png" alt="baixar" width="16" height="16">
+                    Baixar
                 </button>
-                <button onclick="imprimirQRCode()" class="spda-btn-qr spda-btn-qr-secondary">
-                    🖨️ Imprimir
+                
+                <button type="button" onclick="imprimirQRCode()" class="spda-btn-qr spda-btn-qr-secondary" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                    <img src="./assets/imagem-qrcode/printer.png" alt="imprimir" width="16" height="16">
+                    Imprimir
                 </button>
+                
             </div>
         </div>
     `;
@@ -28,9 +38,7 @@ function criarContainerQR(codigoPonto) {
     return container;
 }
 
-/**
- * Gera a imagem do QR Code
- */
+
 function gerarQRCode(codigoPonto) {
     const containerQR = document.getElementById('qrcode');
     if (!containerQR) {
@@ -54,8 +62,8 @@ function gerarQRCode(codigoPonto) {
         if (typeof QRCode !== 'undefined') {
             new QRCode(containerQR, {
                 text: urlCompleta,
-                width: 120,
-                height: 120,
+                width: 300,
+                height: 300,
                 colorDark: "#01257D",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
@@ -74,9 +82,6 @@ function gerarQRCode(codigoPonto) {
     }
 }
 
-/**
- * Remove o QR Code
- */
 function removerQRCode() {
     const container = document.getElementById('qr-code-container');
     if (container) {
@@ -85,9 +90,6 @@ function removerQRCode() {
     }
 }
 
-/**
- * Baixa o QR Code
- */
 function baixarQRCode() {
     const canvas = document.querySelector('#qr-code-container canvas');
     if (!canvas) {
@@ -104,9 +106,6 @@ function baixarQRCode() {
     link.click();
 }
 
-/**
- * Imprime o QR Code
- */
 function imprimirQRCode() {
     const container = document.getElementById('qr-code-container');
     if (!container) {

@@ -321,14 +321,13 @@ nav {
 }
 
 .spda-btn-qr-secondary {
-    background: #f0f4fa !important;
-    color: #01257D !important;
+    background: #01257D !important;
+    color: white !important;
     border: 2px solid #01257D !important;
 }
 
 .spda-btn-qr-secondary:hover {
-    background: #01257D !important;
-    color: white !important;
+    background: #001a5e !important;
     transform: translateY(-2px);
 }
 
