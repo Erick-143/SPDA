@@ -7,6 +7,8 @@ const createInspecao = async (req, res) => {
     const { 
       ponto_id, 
       usuario_id, 
+      data_inspecao,           
+      responsavel_digitado,    
       condicao_visual, 
       continuidade_eletrica, 
       resistencia_aterramento, 
@@ -16,18 +18,31 @@ const createInspecao = async (req, res) => {
       observacoes 
     } = req.body;
 
+    // O schema não possui a coluna "responsavel" na tabela inspecoes (usa relacionamento com usuarios)
+    // aqui eu to anexando no inicio das observações técnicas 
+    let observacaoFinal = observacoes || '';
+    if (responsavel_digitado) {
+        observacaoFinal = `[Responsável Técnico: ${responsavel_digitado}] ` + observacaoFinal;
+    }
+
     const novaInspecao = await prisma.inspecoes.create({
       data: {
-        ponto_id,
-        usuario_id,
+        ponto_id: Number(ponto_id),
+        usuario_id: Number(usuario_id),
+        data_inspecao: new Date(data_inspecao), 
         condicao_visual,
         continuidade_eletrica,
         resistencia_aterramento,
-        oxidacao,
-        necessidade_correcao,
-        conformidade,
-        observacoes
+        oxidacao: Boolean(oxidacao),
+        necessidade_correcao: Boolean(necessidade_correcao),
+        conformidade: Boolean(conformidade),
+        observacoes: observacaoFinal
       }
+    });
+
+    await prisma.pontos_spda.update({
+      where: { id: Number(ponto_id) },
+      data: { status: Boolean(conformidade) }
     });
 
     res.status(201).json(novaInspecao);
@@ -37,16 +52,16 @@ const createInspecao = async (req, res) => {
   }
 };
 
-// 2. Função para buscar o histórico da Ficha Digital (usada ao ler o QR Code)
+// 2. Função para buscar o histórico da Ficha Digital 
 const getInspecoesPorPonto = async (req, res) => {
   try {
-    const { ponto_id } = req.params; // Pega o ID do ponto que vem na URL
+    const { ponto_id } = req.params; 
 
     const historico = await prisma.inspecoes.findMany({
       where: { ponto_id: Number(ponto_id) },
-      orderBy: { data_inspecao: 'desc' }, // Traz as medições mais novas primeiro
+      orderBy: { data_inspecao: 'desc' }, 
       include: {
-        usuarios: true // Traz os dados do técnico que fez a inspeção
+        usuarios: true 
       }
     });
 
