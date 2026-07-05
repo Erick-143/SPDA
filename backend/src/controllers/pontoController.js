@@ -7,6 +7,7 @@ const getPontos = async (req, res) => {
     const pontos = await prisma.pontos_spda.findMany({
       include: {
         cliente: true,
+        unidade: true,    
         area: true,
         tipo_ponto: true
       }
@@ -22,7 +23,7 @@ const getPontos = async (req, res) => {
 const createPonto = async (req, res) => {
   try {
     const { cliente_id, unidade_id, area_id, tipo_ponto_id, localizacao, descricao, criticidade } = req.body;
-    
+
     // 1. Busca as informações simultaneamente para o código único
     const cliente = await prisma.cliente.findUnique({ where: { id: cliente_id } });
     const area = await prisma.area.findUnique({ where: { id: area_id } });
@@ -38,6 +39,7 @@ const createPonto = async (req, res) => {
     const siglaAre = area?.sigla || 'ARE';
     const siglaTip = tipo?.sigla || 'TIP';
     const baseCodigo = `${siglaCli}-SPDA-${siglaAre}-${siglaTip}`;
+
     const novoPonto = await prisma.pontos_spda.create({
       data: {
         codigo_unico: `${baseCodigo}-TEMP-${Date.now()}`,
@@ -52,7 +54,7 @@ const createPonto = async (req, res) => {
     });
 
     const codigoDefinitivo = `${baseCodigo}-${String(novoPonto.id).padStart(3, '0')}`;
-    
+
     const pontoFinal = await prisma.pontos_spda.update({
       where: { id: novoPonto.id },
       data: { codigo_unico: codigoDefinitivo }
@@ -65,6 +67,7 @@ const createPonto = async (req, res) => {
   }
 };
 
+// Função para buscar um ponto específico pelo código único 
 const buscarPorCodigo = async (req, res) => {
   try {
     const { codigo } = req.params;
@@ -75,8 +78,14 @@ const buscarPorCodigo = async (req, res) => {
       },
       include: {
         cliente: true,
+        unidade: true,
         area: true,
-        tipo_ponto: true
+        tipo_ponto: true,
+        inspecoes: {
+          include: {
+            usuarios: true // Isto vai puxar o nome da pessoa que fez a inspeção!
+          }
+        }
       }
     });
 
@@ -95,5 +104,5 @@ const buscarPorCodigo = async (req, res) => {
 module.exports = {
   getPontos,
   createPonto,
-  buscarPorCodigo 
-}; 
+  buscarPorCodigo
+};
