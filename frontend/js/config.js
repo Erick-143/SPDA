@@ -35,29 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
             renderClientes.innerHTML = ''; // Limpa a lista
             
             if(clientes.length === 0) {
-                renderClientes.innerHTML = '<p style="color: #666; font-size: 0.9rem;">Nenhum cliente cadastrado.</p>';
+                renderClientes.innerHTML = '<p class="config-lista-vazia">Nenhum cliente cadastrado.</p>';
                 return;
             }
 
             clientes.forEach(cliente => {
                 const div = document.createElement('div');
-                div.style.display = "flex";
-                div.style.justifyContent = "space-between";
-                div.style.alignItems = "center";
-                div.style.padding = "10px";
-                div.style.borderBottom = "1px solid #eee";
+                div.className = 'config-item';
                 
                 // NOVO VISUAL: Crachá "Ativo" + Botão "Inativar"
                 div.innerHTML = `
-                    <div>
+                    <div class="config-item-info">
                         <strong>${cliente.nome}</strong> 
-                        <span style="color: #666; font-size: 0.8rem;">(${cliente.sigla})</span>
+                        <span class="config-item-meta">(${cliente.sigla})</span>
                     </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span style="background-color: #d4edda; color: #155724; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                    <div class="config-item-acoes">
+                        <span class="status-ativo">
                             ● Ativo
                         </span>
-                        <button onclick="inativarCliente(${cliente.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                        <button class="btn-inativar" onclick="inativarCliente(${cliente.id})">
                             Inativar
                         </button>
                     </div>
@@ -171,28 +167,24 @@ document.addEventListener('DOMContentLoaded', () => {
             renderUnidades.innerHTML = ''; 
             
             if(unidades.length === 0) {
-                renderUnidades.innerHTML = '<p style="color: #666; font-size: 0.9rem;">Nenhuma unidade cadastrada.</p>';
+                renderUnidades.innerHTML = '<p class="config-lista-vazia">Nenhuma unidade cadastrada.</p>';
                 return;
             }
 
             unidades.forEach(unidade => {
                 const div = document.createElement('div');
-                div.style.display = "flex";
-                div.style.justifyContent = "space-between";
-                div.style.alignItems = "center";
-                div.style.padding = "10px";
-                div.style.borderBottom = "1px solid #eee";
+                div.className = 'config-item';
                 
                 div.innerHTML = `
-                    <div>
+                    <div class="config-item-info">
                         <strong>${unidade.nome}</strong> 
-                        <span style="color: #666; font-size: 0.8rem;">(Cliente: ${unidade.cliente.nome})</span>
+                        <span class="config-item-meta">(Cliente: ${unidade.cliente.nome})</span>
                     </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span style="background-color: #d4edda; color: #155724; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                    <div class="config-item-acoes">
+                        <span class="status-ativo">
                             ● Ativo
                         </span>
-                        <button onclick="inativarUnidade(${unidade.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                        <button class="btn-inativar" onclick="inativarUnidade(${unidade.id})">
                             Inativar
                         </button>
                     </div>
@@ -310,24 +302,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             areas.forEach(area => {
                 const div = document.createElement('div');
-                div.style.display = "flex";
-                div.style.justifyContent = "space-between";
-                div.style.alignItems = "center";
-                div.style.padding = "10px";
-                div.style.borderBottom = "1px solid #eee";
+                div.className = 'config-item';
                 
                 div.innerHTML = `
                     <div>
-                        <strong>${area.nome}</strong> <span style="color: #666; font-size: 0.8rem;">(${area.sigla})</span>
-                        <div style="color: #888; font-size: 0.75rem; margin-top: 3px;">
+                        <strong>${area.nome}</strong> <span class="config-item-meta">(${area.sigla})</span>
+                        <div class="config-item-submeta">
                             Unidade: ${area.unidade.nome} | Cliente: ${area.unidade.cliente.nome}
                         </div>
                     </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span style="background-color: #d4edda; color: #155724; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                    <div class="config-item-acoes">
+                        <span class="status-ativo">
                             ● Ativo
                         </span>
-                        <button onclick="inativarArea(${area.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                        <button class="btn-inativar" onclick="inativarArea(${area.id})">
                             Inativar
                         </button>
                     </div>
@@ -414,26 +402,22 @@ document.addEventListener('DOMContentLoaded', () => {
             renderTipos.innerHTML = ''; 
             
             if(tipos.length === 0) {
-                renderTipos.innerHTML = '<p style="color: #666; font-size: 0.9rem;">Nenhum tipo cadastrado.</p>';
+                renderTipos.innerHTML = '<p class="config-lista-vazia">Nenhum tipo cadastrado.</p>';
                 return;
             }
             tipos.forEach(tipo => {
                 const div = document.createElement('div');
-                div.style.display = "flex";
-                div.style.justifyContent = "space-between";
-                div.style.alignItems = "center";
-                div.style.padding = "10px";
-                div.style.borderBottom = "1px solid #eee";
+                div.className = 'config-item';
                 
                 div.innerHTML = `
                     <div>
-                        <strong>${tipo.nome}</strong> <span style="color: #666; font-size: 0.8rem;">(${tipo.sigla})</span>
+                        <strong>${tipo.nome}</strong> <span class="config-item-meta">(${tipo.sigla})</span>
                     </div>
-                    <div style="display: flex; gap: 10px; align-items: center;">
-                        <span style="background-color: #d4edda; color: #155724; padding: 3px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">
+                    <div class="config-item-acoes">
+                        <span class="status-ativo">
                             ● Ativo
                         </span>
-                        <button onclick="inativarTipo(${tipo.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
+                        <button class="btn-inativar" onclick="inativarTipo(${tipo.id})">
                             Inativar
                         </button>
                     </div>
