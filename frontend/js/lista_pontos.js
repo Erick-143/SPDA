@@ -30,7 +30,7 @@ async function buscarPontosDoBanco() {
         const grid = document.getElementById('grid-pontos');
         grid.innerHTML = `
             <div class="empty-state">
-                <h3 style="color: var(--cor-erro);">⚠️ Erro ao conectar com o servidor.</h3>
+                <h3 style="color: var(--cor-erro);"> Erro ao conectar com o servidor.</h3>
                 <p>Verifique se o backend está rodando na porta 3000.</p>
             </div>
         `;
