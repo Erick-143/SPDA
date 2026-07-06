@@ -10,19 +10,19 @@ const getResumo = async (req, res) => {
         const inspecoesConformes = await prisma.inspecoes.count({
       where: { 
         conformidade: true,
-        pontos_spda: { ativo: true } // Só conta se estiver ativo
+        pontos_spda: { ativo: true } 
       }
     });
 
     const inspecoesNaoConformes = await prisma.inspecoes.count({
       where: { 
         conformidade: false,
-        pontos_spda: { ativo: true } // Só conta se estiver ativo
+        pontos_spda: { ativo: true }
       }
     });
 
 
-    // Calculando a média direto no banco de dados (ignorando pontos inativados)
+    // Calculando a média direto no banco de dados, pontos inativos não são contabilizados 
     const mediaObj = await prisma.inspecoes.aggregate({
       _avg: { resistencia_aterramento: true },
       where: { pontos_spda: { ativo: true } }
@@ -35,7 +35,7 @@ const getResumo = async (req, res) => {
       take: 5,
       orderBy: { data_inspecao: 'desc' },
       include: { pontos_spda: true },
-      where: { pontos_spda: { ativo: true } } // Esconde do painel as inspeções de pontos inativos
+      where: { pontos_spda: { ativo: true } } 
     });
 
     res.json({

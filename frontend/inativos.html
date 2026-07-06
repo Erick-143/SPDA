@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="./css/config.css">
     <link rel="stylesheet" href="./css/footer.css">
     <script src="./js/seguranca.js"></script>
-    
-    <!-- DICA: Cole o CSS novo aqui se não for usar o config.css -->
 </head>
 <body>
     <nav>
@@ -47,7 +45,6 @@
                     <button class="tab-btn" data-tab="tab-pontos-inativos">Pontos SPDA Inativos</button>
                 </div>
 
-                <!-- Aba Clientes -->
                 <div id="tab-clientes-inativos" class="tab-ctt active">
                     <div class="lista-itens">
                         <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Estes clientes foram inativados. Restaure-os clicando em Reativar.</h3>
@@ -55,7 +52,6 @@
                     </div>
                 </div>
 
-                <!-- Aba Unidades -->
                 <div id="tab-unidades-inativas" class="tab-ctt">
                     <div class="lista-itens">
                         <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Unidades inativadas</h3>
@@ -64,7 +60,6 @@
                     </div>
                 </div>
 
-                <!-- Aba Áreas -->
                 <div id="tab-areas-inativas" class="tab-ctt">
                     <div class="lista-itens">
                         <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Áreas inativadas.</h3>
@@ -72,7 +67,6 @@
                     </div>
                 </div>
 
-                <!-- Aba Tipos -->
                 <div id="tab-tipos-inativos" class="tab-ctt">
                     <div class="lista-itens">
                         <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Tipos de Ponto inativados.</h3>
@@ -132,7 +126,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Lógica das Abas (Tabs)
+            // Lógica das Abas
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-ctt');
 
@@ -155,7 +149,6 @@
                 setTimeout(() => { msgFeedback.innerText = ""; }, 3000);
             }
 
-            // ================= CLIENTES =================
             const renderInativosCli = document.getElementById('clientes-inativos-render');
             async function carregarClientesInativos() {
                 try {
@@ -201,7 +194,6 @@
                 }
             };
 
-            // ================= UNIDADES =================
             const renderInativosUni = document.getElementById('unidades-inativas-render');
             async function carregarUnidadesInativas() {
                 try {

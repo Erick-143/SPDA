@@ -45,7 +45,6 @@
         <div class="formulario">
             <form id="form-cadastro-ponto">
 
-                <!-- Linha 1: Cliente e Unidade -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="cliente">Cliente *</label>
@@ -77,7 +76,6 @@
                     </div>
                 </div>
 
-                <!-- Linha 3: Localização e Criticidade -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="localizacao">Localização *</label>
@@ -94,7 +92,6 @@
                     </div>
                 </div>
 
-                <!-- Linha 4: Status -->
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="status">Status *</label>
@@ -106,7 +103,6 @@
                     </div>
                 </div>
 
-                <!-- Textos -->
                 <div class="grup-form">
                     <label for="descricao">Descrição do Ponto:</label>
                     <textarea id="descricao" placeholder="Descreva as características do ponto de SPDA..."></textarea>
@@ -117,7 +113,6 @@
                     <textarea id="observacao" placeholder="Insira as observações referentes ao ponto..."></textarea>
                 </div>
 
-                <!-- Exibição do Código -->
                 <div class="grup-form">
                     <label>Codigo único gerado automaticamente:</label>
                     <div class="gerador-cod" id="codigo-gerado"><!--automatizar o processo--></div>
@@ -125,7 +120,6 @@
                         pelo servidor com base nas siglas escolhidas</small>
                 </div>
 
-                <!-- Botões -->
                 <div class="form-ac">
                     <button type="button" class="btn-seg"
                         onclick="document.getElementById('form-cadastro-ponto').reset(); document.getElementById('codigo-gerado').innerText = '';">Limpar</button>

@@ -8,12 +8,12 @@ const listarAreas = async (req, res) => {
         ativo: true,
         unidade: { 
           ativo: true,
-          cliente: { ativo: true } // O cliente também precisa estar ativo!
+          cliente: { ativo: true } 
         } 
       },
       include: { 
         unidade: {
-          include: { cliente: true } // Para exibir na tela: Tanques (Piracicaba - Raízen)
+          include: { cliente: true } 
         }
       }
     });
@@ -54,7 +54,7 @@ const calcularImpactoArea = async (req, res) => {
   }
 };
 
-// Soft Delete (Inativar)
+// Inativar
 const excluirArea = async (req, res) => {
   try {
     const { id } = req.params;

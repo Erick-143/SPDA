@@ -4,7 +4,7 @@ const prisma = require('../prismaClient');
 const listarClientes = async (req, res) => {
   try {
     const clientes = await prisma.cliente.findMany({
-      where: { ativo: true } // Garante que só puxamos os clientes ativos
+      where: { ativo: true } 
     });
     res.json(clientes);
   } catch (error) {

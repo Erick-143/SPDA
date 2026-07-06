@@ -91,7 +91,7 @@ const buscarPorCodigo = async (req, res) => {
         tipo_ponto: true,
         inspecoes: {
           include: {
-            usuarios: true // Isto vai puxar o nome da pessoa que fez a inspeção!
+            usuarios: true 
           }
         }
       }
@@ -109,7 +109,6 @@ const buscarPorCodigo = async (req, res) => {
   }
 };
 
-// --- NOVAS FUNÇÕES PARA ARQUIVO MORTO ---
 const inativarPonto = async (req, res) => {
   try {
     const { id } = req.params;

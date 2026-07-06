@@ -15,7 +15,7 @@ const createInspecao = async (req, res) => {
       observacoes 
     } = req.body;
 
-    // 1. Captura o caminho da foto se ela existir
+    // 1. Captura o caminho da foto se existir
     const fotoUrl = req.file ? `/uploads/${req.file.filename}` : null;
 
     const novaInspecao = await prisma.inspecoes.create({

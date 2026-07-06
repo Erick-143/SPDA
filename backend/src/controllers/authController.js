@@ -6,7 +6,6 @@ const { OAuth2Client } = require('google-auth-library');
 // Usa a variável de ambiente se existir, ou a string fixa de fallback
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "629604508013-83t8kmdlt1gq798k92nrgdtlmm9e2g7t.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
-// 1. Entrar direto com o botão do Google (Versão Segura)
 const loginGoogle = async (req, res) => {
   try {
     const { token } = req.body; // Agora recebemos o TOKEN, não mais o e-mail solto

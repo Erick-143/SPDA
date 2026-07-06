@@ -1,13 +1,14 @@
 const prisma = require('../prismaClient');
-// Listar unidades ATIVAS E que o Cliente dono também esteja ATIVO
+
+// Listar unidades e clientes ATIVOS
 const listarUnidades = async (req, res) => {
   try {
     const unidades = await prisma.unidade.findMany({
       where: { 
         ativo: true,
-        cliente: { ativo: true } // FILTRO INTELIGENTE
+        cliente: { ativo: true } 
       },
-      include: { cliente: true } // Traz os dados do cliente junto
+      include: { cliente: true } 
     });
     res.json(unidades);
   } catch (error) {
@@ -15,6 +16,7 @@ const listarUnidades = async (req, res) => {
     res.status(500).json({ erro: "Erro ao buscar unidades." });
   }
 };
+
 // Criar nova unidade
 const criarUnidade = async (req, res) => {
   try {
@@ -29,6 +31,7 @@ const criarUnidade = async (req, res) => {
     res.status(500).json({ erro: "Erro ao cadastrar unidade." });
   }
 };
+
 // Calcular impacto da inativação
 const calcularImpactoUnidade = async (req, res) => {
   try {
@@ -41,6 +44,7 @@ const calcularImpactoUnidade = async (req, res) => {
     res.status(500).json({ erro: "Erro ao calcular impacto." });
   }
 };
+
 // Soft Delete (Inativar)
 const excluirUnidade = async (req, res) => {
   try {
@@ -54,7 +58,7 @@ const excluirUnidade = async (req, res) => {
     res.status(500).json({ erro: "Erro ao inativar unidade." });
   }
 };
-// Arquivo Morto: Listar Inativas
+
 // Arquivo Morto: Listar Inativas
 const listarUnidadesInativas = async (req, res) => {
   try {

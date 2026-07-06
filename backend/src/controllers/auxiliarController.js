@@ -8,7 +8,7 @@ const getDadosCadastro = async (req, res) => {
     const areas = await prisma.area.findMany({ where: { ativo: true } });
     const tipos = await prisma.tipo_ponto.findMany({ where: { ativo: true } });
 
-    // Empacota tudo num JSON e envia
+    // Empacota tudo num JSON e envia (passagem)
     res.json({ clientes, unidades, areas, tipos });
   } catch (error) {
     console.error("Erro ao buscar dados auxiliares:", error);

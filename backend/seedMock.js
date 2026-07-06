@@ -1,4 +1,3 @@
-// seedMock.js
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -41,7 +40,7 @@ async function main() {
 
   console.log("Criando 14 pontos de SPDA com laudos preenchidos...");
   
-  // 3. O Loop da Mágica (Faz o trabalho de criar 14 pontos)
+  // 3. O Loop da Mágica 
   for (let i = 1; i <= 14; i++) {
     const baseCodigo = `${cliente.sigla}-SPDA-${area.sigla}-${tipo.sigla}`;
     
@@ -59,7 +58,7 @@ async function main() {
       }
     });
 
-    // Atualiza a Regra de Negócio da Tag (Ex: MET-SPDA-GLP-HST-002)
+    // Atualiza a Regra de Negócio da Tag 
     const codigoDefinitivo = `${baseCodigo}-${String(novoPonto.id).padStart(3, '0')}`;
     await prisma.pontos_spda.update({
       where: { id: novoPonto.id },
@@ -67,7 +66,7 @@ async function main() {
     });
 
     // 4. Cria a Inspeção para este Ponto (Laudo do Técnico)
-    // A cada 3 pontos, simulamos que um está ruim (para os gráficos do Dashboard)
+    // A cada 3 pontos, simulamos que um está ruim (Dashboard)
     const estaRuim = (i % 3 === 0);
 
     await prisma.inspecoes.create({
@@ -75,17 +74,17 @@ async function main() {
         ponto_id: novoPonto.id,
         usuario_id: inspetor.id,
         condicao_visual: estaRuim ? 'Oxidação aparente' : 'Boa',
-        continuidade_eletrica: (0.1 + Math.random()).toFixed(2), // Valores elétricos aleatórios
+        continuidade_eletrica: (0.1 + Math.random()).toFixed(2), 
         resistencia_aterramento: (5 + Math.random() * 5).toFixed(2),
         oxidacao: estaRuim,
         necessidade_correcao: estaRuim,
-        conformidade: !estaRuim, // Se está ruim, Não Conforme
+        conformidade: !estaRuim, 
         observacoes: estaRuim ? 'Necessária a substituição da haste e lixamento' : 'Parâmetros normais'
       }
     });
   }
 
-  console.log("✅ Sucesso! O seu banco está recheado com 14 pontos e 14 inspeções prontas para a Banca.");
+  console.log("Sucesso! O seu banco está recheado com 14 pontos e 14 inspeções prontas para a Banca.");
 }
 
 main().catch(console.error).finally(() => prisma.$disconnect());

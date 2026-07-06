@@ -400,10 +400,6 @@ nav {
     }
 }
 
-/* =========================================
-   ESTILIZAÇÃO DOS CARDS DO ARQUIVO MORTO
-========================================= */
-
 .lista-itens {
     display: flex;
     flex-direction: column;
@@ -416,14 +412,13 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
-    border-bottom: 1px solid #e0e0e0; /* Linha divisória fina */
+    border-bottom: 1px solid #e0e0e0;
     font-family: 'Inter', sans-serif;
 }
 
-/* Container do lado esquerdo (Textos) */
 .card-inativo .card-info {
     font-size: 1rem;
-    color: #002b5e; /* Azul escuro padrão do seu sistema */
+    color: #002b5e;
 }
 
 .card-inativo .card-info strong {
@@ -437,14 +432,12 @@ nav {
     font-weight: 500;
 }
 
-/* Container do lado direito (Selo e Botão) */
 .card-actions {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* Badge de "Inativo" */
 .badge-inativo {
     background-color: #f1f3f5;
     color: #666;
@@ -466,7 +459,6 @@ nav {
     border-radius: 50%;
 }
 
-/* Botão de Reativar (Arredondado com borda verde) */
 .btn-reativar {
     background-color: transparent;
     color: var(--primary-color);

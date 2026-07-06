@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config();
 
 const express = require('express');
@@ -24,13 +23,13 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads')); //adicionei agora se der erro é ela 
 app.use('/public', express.static('public'));
 
-// 📍 Rota de Teste de Vida
+// Rota de Teste de Vida
 app.get('/api/teste', (req, res) => {
   res.json({ mensagem: 'Servidor SmartLab a funcionar perfeitamente! 🚀' });
 });
 
-// 📍 Rotas de Negócio
-app.use('/api/areas', areaRoutes); // Todas as requisições para /api/areas caem no arquivo de rotas de Área
+// Rotas de Negócio
+app.use('/api/areas', areaRoutes); 
 
 app.use('/api/pontos', pontoRoutes);
 
