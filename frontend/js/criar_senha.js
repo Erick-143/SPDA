@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnSalvar = document.getElementById('btnSalvar');
     const msgRetorno = document.getElementById('msg-retorno');
 
-    function mostrarMensagem(texto, tipo) {
-        msgRetorno.textContent = texto;
-        msgRetorno.className = tipo;
-    }
+function mostrarMensagem(texto, tipo) {
+    const iconSrc = tipo === 'erro' ? './assets/imagem-ficha/check.png' : './assets/imagem-ficha/x.png';
+    
+    msgRetorno.innerHTML = `<img src="${iconSrc}" class="msg-icon" alt="status"> ${texto}`;
+    msgRetorno.className = tipo;
+}
 
     function limparMensagem() {
         msgRetorno.textContent = '';
@@ -27,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const senha = senhaInput.value.trim();
 
         if (!email || !senha) {
-            mostrarMensagem('❌ Preencha todos os campos.', 'erro');
+            mostrarMensagem('Preencha todos os campos.', 'erro');
             return;
         }
 
         if (senha.length < 6) {
-            mostrarMensagem('❌ A senha deve ter pelo menos 6 caracteres.', 'erro');
+            mostrarMensagem('A senha deve ter pelo menos 6 caracteres.', 'erro');
             return;
         }
 
         if (!email.includes('@') || !email.includes('.')) {
-            mostrarMensagem('❌ Digite um e-mail válido.', 'erro');
+            mostrarMensagem('Digite um e-mail válido.', 'erro');
             return;
         }
 
@@ -59,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const respostaJson = await res.json();
 
             if (res.ok) {
-                mostrarMensagem('✅ Senha criada com sucesso! Redirecionando...', 'sucesso');
+                mostrarMensagem('Senha criada com sucesso! Redirecionando...', 'sucesso');
                 btnSalvar.textContent = 'Salvo!';
 
                 // Redireciona após 2 segundos
@@ -68,13 +70,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 2000);
 
             } else {
-                mostrarMensagem('❌ ' + (respostaJson.erro || 'Erro ao criar senha.'), 'erro');
+                mostrarMensagem('' + (respostaJson.erro || 'Erro ao criar senha.'), 'erro');
                 btnSalvar.disabled = false;
                 btnSalvar.textContent = 'Salvar Senha';
             }
 
         } catch (error) {
-            mostrarMensagem('❌ Erro de conexão com o servidor.', 'erro');
+            mostrarMensagem('353453Erro de conexão com o servidor.', 'erro');
             btnSalvar.disabled = false;
             btnSalvar.textContent = 'Salvar Senha';
             console.error('Erro:', error);
