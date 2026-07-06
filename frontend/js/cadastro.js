@@ -240,7 +240,6 @@ async function salvarPonto(e) {
                 divCodigo.parentNode.insertBefore(container, divCodigo.nextSibling);
                 gerarQRCode(pontoSalvo.codigo_unico);
             }
-
             alert('Ponto cadastrado com sucesso no banco de dados!');
 
             // Limpa os campos de texto do formulário para permitir novos registros

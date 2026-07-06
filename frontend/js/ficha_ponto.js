@@ -29,8 +29,17 @@ async function carregarDadosDaFicha(codigo) {
 
         const ponto = await res.json();
 
-        // 3. Preenche os dados básicos e características do Ponto
+                // 3. Preenche os dados básicos e características do Ponto
         document.getElementById('ponto-codigo').innerText = ponto.codigo_unico;
+
+        // --- Renderiza o QR Code dinamicamente na ficha ---
+        if (ponto.codigo_unico) {
+            const container = criarContainerQR(ponto.codigo_unico);
+            // Insere ao final da div destaque-container, depois das badges
+            document.querySelector('.destaque-container').appendChild(container);
+            gerarQRCode(ponto.codigo_unico);
+        }
+        // -----------------------------------------------------------
         document.getElementById('ponto-area').innerText = `${ponto.area?.nome || '---'} (${ponto.area?.sigla || ''})`;
         document.getElementById('ponto-unidade').innerText = ponto.unidade?.nome || 'Planta Principal';
         document.getElementById('ponto-localizacao').innerText = ponto.localizacao || 'Sem descrição cadastrada';

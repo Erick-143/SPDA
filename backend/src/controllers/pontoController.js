@@ -1,5 +1,5 @@
 // src/controllers/pontoController.js
-const prisma = require('../prismaClient');
+const prisma = require('../prismaClient'); // Esta linha já existe
 
 // Função para buscar os pontos (incluindo os dados das tabelas relacionadas)
 const getPontos = async (req, res) => {
@@ -60,6 +60,7 @@ const createPonto = async (req, res) => {
       }
     });
 
+    // Esse é o trecho que já existe (por volta da linha 63)
     const codigoDefinitivo = `${baseCodigo}-${String(novoPonto.id).padStart(3, '0')}`;
 
     const pontoFinal = await prisma.pontos_spda.update({
