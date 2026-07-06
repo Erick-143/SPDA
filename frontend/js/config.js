@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const impacto = await resImpacto.json();
             
             // Passo 2: Monta a mensagem personalizada dinâmica
-            const mensagem = `⚠️ ATENÇÃO! Ao inativar este cliente, você também ocultará do sistema:\n\n` +
-                             `🏢 ${impacto.unidades} Unidades\n` +
-                             `📐 ${impacto.areas} Áreas\n` +
-                             `⚡ ${impacto.pontos} Pontos de Inspeção\n\n` +
+            const mensagem = ` ATENÇÃO! Ao inativar este cliente, você também ocultará do sistema:\n\n` +
+                             ` ${impacto.unidades} Unidades\n` +
+                             ` ${impacto.areas} Áreas\n` +
+                             ` ${impacto.pontos} Pontos de Inspeção\n\n` +
                              `Deseja continuar e mover tudo para o Arquivo Morto?`;
                              
             // Passo 3: Exibe o Alerta. Se o usuário clicar em Cancelar, o código para aqui.
@@ -233,9 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const impacto = await resImpacto.json();
             
-            const mensagem = `⚠️ ATENÇÃO! Ao inativar esta unidade, você também ocultará:\n\n` +
-                             `📐 ${impacto.areas} Áreas\n` +
-                             `⚡ ${impacto.pontos} Pontos de Inspeção\n\n` +
+            const mensagem = ` ATENÇÃO! Ao inativar esta unidade, você também ocultará:\n\n` +
+                             ` ${impacto.areas} Áreas\n` +
+                             ` ${impacto.pontos} Pontos de Inspeção\n\n` +
                              `Deseja continuar?`;
                              
             if(!confirm(mensagem)) return;
@@ -363,8 +363,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const impacto = await resImpacto.json();
             
-            const mensagem = `⚠️ ATENÇÃO! Ao inativar esta área, você também ocultará:\n\n` +
-                             `⚡ ${impacto.pontos} Pontos de Inspeção\n\n` +
+            const mensagem = ` ATENÇÃO! Ao inativar esta área, você também ocultará:\n\n` +
+                             ` ${impacto.pontos} Pontos de Inspeção\n\n` +
                              `Deseja continuar?`;
                              
             if(!confirm(mensagem)) return;
@@ -460,8 +460,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const impacto = await resImpacto.json();
             
-            const mensagem = `⚠️ ATENÇÃO! Ao inativar este Tipo, você ocultará ele de todos os menus. E mais:\n\n` +
-                             `⚡ Existem ${impacto.pontos} Pontos de Inspeção vinculados a ele.\n\n` +
+            const mensagem = ` ATENÇÃO! Ao inativar este Tipo, você ocultará ele de todos os menus. E mais:\n\n` +
+                             ` Existem ${impacto.pontos} Pontos de Inspeção vinculados a ele.\n\n` +
                              `Deseja continuar?`;
                              
             if(!confirm(mensagem)) return;
@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!msgFeedback) return;
         
         msgFeedback.innerText = msg;
-        msgFeedback.style.color = tipo === 'success' ? '#28a745' : '#dc3545';
+        msgFeedback.style.color = tipo === 'success' ? '#4a8bdf' : '#dc3545';
         msgFeedback.style.padding = "10px";
         msgFeedback.style.marginTop = "15px";
         msgFeedback.style.fontWeight = "bold";

@@ -128,10 +128,10 @@ function mostrarResumoPonto() {
         boxResumo.innerHTML = `
             <strong style="color: #333;">Detalhes do Ponto:</strong><br>
             <span style="font-size: 0.95rem; color: #555;">
-                🏢 <b>Cliente:</b> ${ponto.cliente?.nome || 'N/A'}<br>
-                🏭 <b>Unidade:</b> ${ponto.unidade?.nome || 'N/A'}<br>
-                📐 <b>Área:</b> ${ponto.area?.nome || 'N/A'}<br>
-                📍 <b>Localização:</b> ${ponto.localizacao || 'Sem descrição exata'}
+                 <b>Cliente:</b> ${ponto.cliente?.nome || 'N/A'}<br>
+                 <b>Unidade:</b> ${ponto.unidade?.nome || 'N/A'}<br>
+                 <b>Área:</b> ${ponto.area?.nome || 'N/A'}<br>
+                 <b>Localização:</b> ${ponto.localizacao || 'Sem descrição exata'}
             </span>
         `;
     }

@@ -24,7 +24,7 @@ else if (perfil) {
 
     // Se um Inspetor tentar invadir uma página de Gestor:
     if (perfil === 'inspetor' && paginasExclusivasGestor.includes(paginaAtual)) {
-        alert("🔒 Acesso Negado: Esta área é restrita a Gestores.");
+        alert(" Acesso Negado: Esta área é restrita a Gestores.");
         window.location.href = 'leitura.html'; // Joga ele de volta pra câmera
     }
 

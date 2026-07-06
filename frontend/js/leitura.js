@@ -103,7 +103,7 @@ class QRCodeScanner {
 
             if (res.ok) {
                 // Ponto existe!
-                this.showFeedback(`✅ Ponto encontrado! Redirecionando... <br><span class="ponto-id">${codigo}</span>`, 'success');
+                this.showFeedback(` Ponto encontrado! Redirecionando... <br><span class="ponto-id">${codigo}</span>`, 'success');
                 
                 // Redireciona após 1.5 segundos (para o usuário conseguir ler a mensagem)
                 setTimeout(() => {
@@ -111,12 +111,12 @@ class QRCodeScanner {
                 }, 1500);
             } else {
                 // Ponto não existe
-                this.showFeedback(`❌ Ponto não encontrado no banco de dados. <br><span class="ponto-id">${codigo}</span>`, 'error');
+                this.showFeedback(` Ponto não encontrado no banco de dados. <br><span class="ponto-id">${codigo}</span>`, 'error');
                 this.restartBtn.style.display = 'inline-flex'; // Mostra botão de tentar de novo
             }
         } catch (error) {
             console.error("Erro na validação do banco:", error);
-            this.showFeedback('⚠️ Erro de conexão com o servidor. Verifique se o backend está rodando.', 'error');
+            this.showFeedback(' Erro de conexão com o servidor. Verifique se o backend está rodando.', 'error');
             this.restartBtn.style.display = 'inline-flex';
         } finally {
             this.isProcessing = false;
