@@ -80,7 +80,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
 
         // 1. Alimenta o card da "Última Medição" com a inspeção mais recente (posição 0)
         const ultima = inspecoes[0];
-        document.getElementById('medicao-data').innerText = new Date(ultima.data_inspecao).toLocaleDateString('pt-BR');
+        document.getElementById('medicao-data').innerText = new Date(ultima.data_inspecao).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
         document.getElementById('medicao-continuidade').innerText = ultima.continuidade_eletrica !== null ? ultima.continuidade_eletrica : '---';
         document.getElementById('medicao-resistencia').innerText = ultima.resistencia_aterramento !== null ? ultima.resistencia_aterramento : '---';
         document.getElementById('medicao-visual').innerText = ultima.condicao_visual || '---';
@@ -102,7 +102,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
             const responsavel = insp.usuarios ? insp.usuarios.nome : `Equipe ${insp.usuario_id}`;
 
             tr.innerHTML = `
-                <td><strong>${new Date(insp.data_inspecao).toLocaleDateString('pt-BR')}</strong></td>
+                <td><strong>${new Date(insp.data_inspecao).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</strong></td>
                 <td>${responsavel}</td>
                 <td ${!isConforme ? 'style="color: var(--vermelho-nao-conforme); font-weight: 600;"' : ''}>${insp.continuidade_eletrica !== null ? insp.continuidade_eletrica : '---'}</td>
                 <td ${!isConforme ? 'style="color: var(--vermelho-nao-conforme); font-weight: 600;"' : ''}>${insp.resistencia_aterramento !== null ? insp.resistencia_aterramento : '---'}</td>
