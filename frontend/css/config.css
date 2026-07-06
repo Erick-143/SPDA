@@ -399,3 +399,96 @@ nav {
         justify-content: space-between;
     }
 }
+
+/* =========================================
+   ESTILIZAÇÃO DOS CARDS DO ARQUIVO MORTO
+========================================= */
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.card-inativo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0; /* Linha divisória fina */
+    font-family: 'Inter', sans-serif;
+}
+
+/* Container do lado esquerdo (Textos) */
+.card-inativo .card-info {
+    font-size: 1rem;
+    color: #002b5e; /* Azul escuro padrão do seu sistema */
+}
+
+.card-inativo .card-info strong {
+    font-weight: 700;
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+.card-inativo .card-info span {
+    color: #555;
+    font-weight: 500;
+}
+
+/* Container do lado direito (Selo e Botão) */
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Badge de "Inativo" */
+.badge-inativo {
+    background-color: #f1f3f5;
+    color: #666;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-inativo::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #999;
+    border-radius: 50%;
+}
+
+/* Botão de Reativar (Arredondado com borda verde) */
+.btn-reativar {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-reativar:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+.btn-reativar img, 
+.btn-reativar svg {
+    width: 14px;
+    height: 14px;
+}
