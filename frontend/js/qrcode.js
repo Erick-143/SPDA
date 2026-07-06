@@ -8,25 +8,25 @@ function criarContainerQR(codigoPonto) {
     container.className = 'spda-qr-wrapper';
     
 container.innerHTML = `
-        <div class="spda-qr-content">
+        <div class="spda-qr-content" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px;">
             <div class="spda-qr-info">
-                <h4 style="display: flex; align-items: center; gap: 8px;">
+                <h4 style="display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--primary-color); margin-bottom: 5px; font-size: 1rem;">
                     <img src="./assets/imagem-qrcode/scan-qr-code.png" alt="ícone qr" width="20" height="20">
                     QR Code do Ponto
                 </h4>
-                <p><strong>Código:</strong> ${codigoPonto}</p>
+                <p style="color: #555; font-size: 0.9rem;"><strong>Código:</strong> ${codigoPonto}</p>
             </div>
             
-            <div class="spda-qr-code" id="qrcode" style="margin: 15px auto; display: flex; justify-content: center;"></div>
+            <div class="spda-qr-code" id="qrcode" style="background: white; padding: 10px; border-radius: 12px; display: inline-block;"></div>
             
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; width: 100%;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; margin-top: 5px;">
                 
-                <button type="button" onclick="baixarQRCode()" class="spda-btn-qr spda-btn-qr-primary" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button type="button" onclick="baixarQRCode()" class="btn-acao-secundaria">
                     <img src="./assets/imagem-qrcode/download.png" alt="baixar" width="16" height="16">
                     Baixar
                 </button>
                 
-                <button type="button" onclick="imprimirQRCode()" class="spda-btn-qr spda-btn-qr-secondary" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <button type="button" onclick="imprimirQRCode()" class="btn-acao-secundaria">
                     <img src="./assets/imagem-qrcode/printer.png" alt="imprimir" width="16" height="16">
                     Imprimir
                 </button>

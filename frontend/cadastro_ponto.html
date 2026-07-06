@@ -7,11 +7,9 @@
     <title>Cadastro de Pontos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/forms.css">
-    
-     <!-- QR Code Library -->
+    <link rel="stylesheet" href="./css/footer.css">
+
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-    
-    <!-- Seus scripts (ATENÇÃO: qrcode.js deve vir ANTES de cadastro.js) -->
     <script src="./js/qrcode.js"></script>
     <script src="./js/cadastro.js"></script>
     <script src="./js/seguranca.js"></script>
@@ -19,9 +17,14 @@
 
 <body>
     <nav>
-        <div class="logo">
-            <span></span> Leitor <span>SPDA</span>
-        </div>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span>
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor
+                <span>SPDA</span>
+            </div>
+        </a>
         <div class="usuario">
             <span id="user-name">Equipe 1</span>
             <div class="usuario-avatar">
@@ -41,7 +44,7 @@
 
         <div class="formulario">
             <form id="form-cadastro-ponto">
-                
+
                 <!-- Linha 1: Cliente e Unidade -->
                 <div class="form-campo">
                     <div class="grup-form">
@@ -58,7 +61,7 @@
                     </div>
                 </div>
 
-                
+
                 <div class="form-campo">
                     <div class="grup-form">
                         <label for="area">Área *</label>
@@ -118,14 +121,17 @@
                 <div class="grup-form">
                     <label>Codigo único gerado automaticamente:</label>
                     <div class="gerador-cod" id="codigo-gerado"><!--automatizar o processo--></div>
-                    <small style="color: #777; display: block; margin-top: 5px;">* O código é gerado automaticamente pelo servidor com base nas siglas escolhidas</small>
+                    <small style="color: #777; display: block; margin-top: 5px;">* O código é gerado automaticamente
+                        pelo servidor com base nas siglas escolhidas</small>
                 </div>
 
                 <!-- Botões -->
                 <div class="form-ac">
-                    <button type="button" class="btn-seg" onclick="document.getElementById('form-cadastro-ponto').reset(); document.getElementById('codigo-gerado').innerText = '';">Limpar</button>
+                    <button type="button" class="btn-seg"
+                        onclick="document.getElementById('form-cadastro-ponto').reset(); document.getElementById('codigo-gerado').innerText = '';">Limpar</button>
                     <button type="submit" class="btn-pri">
-                       <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20" height="20">
+                        <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20"
+                            height="20">
                         Salvar Ponto
                     </button>
                 </div>
@@ -134,6 +140,58 @@
             <div id="mensagem-feedback"></div>
         </div>
     </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+
+                <h3><img class="logo-branca" src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                    Leitor SPDA</h3>
+                <p>
+                    Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.
+                </p>
+            </div>
+
+            <!--<div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#">Cadastrar pontos</a></li>
+                <li><a href="#">Lista de pontos</a></li>
+                <li><a href="#">Nova inspeção</a></li>
+                <li><a href="#">Configurações</a></li>
+            </ul>
+        </div>!-->
+
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Manual do Sistema</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">Contato Técnico</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Email</p>
+                <p>Numero</p>
+                <p>Dias de Funcionamento</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Leitor SPDA. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="#">Termos de uso</a>
+                <span>|</span>
+                <a href="#">Política de privacidade</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>

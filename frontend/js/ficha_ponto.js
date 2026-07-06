@@ -29,7 +29,7 @@ async function carregarDadosDaFicha(codigo) {
 
         const ponto = await res.json();
 
-                // 3. Preenche os dados básicos e características do Ponto
+        // 3. Preenche os dados básicos e características do Ponto
         document.getElementById('ponto-codigo').innerText = ponto.codigo_unico;
 
         // --- Renderiza o QR Code dinamicamente na ficha ---
@@ -134,7 +134,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
     const statusContainer = document.getElementById('ponto-status-container');
     const pontoStatusTexto = statusPonto === false ? 'Inativo' : 'Ativo';
     const pontoStatusBadge = statusPonto === false ? 'nao-conforme' : 'ativo';
-    const pontoStatusIcon = 'wrench.png';
+    const pontoStatusIcon = statusPonto === false ? 'shield-x.png' : 'shield-alert.png';
 
     let conformidadeTexto = 'Sem Insp.';
     let conformidadeBadge = 'ativo';
@@ -144,7 +144,8 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         const isConforme = inspecoes[0].conformidade === true;
         conformidadeTexto = isConforme ? 'Conforme' : 'Não Conforme';
         conformidadeBadge = isConforme ? 'conforme' : 'nao-conforme';
-        conformidadeIcon = 'check.png';
+
+        conformidadeIcon = isConforme ? 'check.png' : 'x.png';
     }
 
     statusContainer.innerHTML = `
@@ -160,34 +161,6 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
     `;
 }
 
-// 6. Função para Gerar PDF do Laudo
 function gerarPDF() {
-    // Esconde os botões para eles não saírem impressos no PDF
-    const botoes = document.getElementById('botoes-impressao');
-    const btnVoltar = document.querySelector('.btn-voltar');
-    const btnNovaInsp = document.getElementById('btn-nova-insp');
-    
-    if (botoes) botoes.style.display = 'none';
-    if (btnVoltar) btnVoltar.style.display = 'none';
-    if (btnNovaInsp) btnNovaInsp.style.display = 'none';
-
-    // Pega o conteúdo completo e o código do ponto para nomear o arquivo
-    const elemento = document.getElementById('conteudo-pdf');
-    const codigo = document.getElementById('ponto-codigo').innerText || 'SPDA';
-
-    // Configurações do PDF (Qualidade, formato, margem)
-    const opt = {
-        margin:       10,
-        filename:     `Laudo_${codigo}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    // Manda gerar o PDF e depois devolve os botões para a tela
-    html2pdf().set(opt).from(elemento).save().then(() => {
-        if (botoes) botoes.style.display = 'flex';
-        if (btnVoltar) btnVoltar.style.display = 'flex';
-        if (btnNovaInsp) btnNovaInsp.style.display = 'inline-flex';
-    });
+    window.print();
 }
