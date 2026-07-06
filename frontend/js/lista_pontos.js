@@ -141,7 +141,7 @@ function renderizarGrid(pontos) {
 
 // 3.5. Lógica para Inativar o Ponto (Mandar para Lixeira)
 async function inativarPonto(id, codigo) {
-    const confirmar = confirm(`Atenção!\nDeseja realmente inativar o ponto ${codigo}?\nEle será movido para o Arquivo Morto.`);
+    const confirmar = confirm(`Atenção!\nDeseja realmente inativar o ponto ${codigo}?\nEle será movido para o Arquivos Inativos.`);
     if (!confirmar) return;
 
     try {

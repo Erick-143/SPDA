@@ -4,6 +4,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 1. Preenche o campo de data automaticamente com a data de hoje
     document.getElementById('data_inspecao').valueAsDate = new Date();
 
+    // Bloqueia e preenche o nome do responsável automaticamente
+    const campoResponsavel = document.getElementById('responsavel');
+    const nomeLogado = localStorage.getItem('nomeUsuario');
+    
+    if (nomeLogado && campoResponsavel) {
+        campoResponsavel.value = nomeLogado;
+        campoResponsavel.readOnly = true; // Impede que a pessoa apague ou mude o nome
+        campoResponsavel.style.backgroundColor = '#e9ecef'; // Deixa cinza para indicar que é bloqueado
+    }
+
+    // Dá feedback visual quando a pessoa escolhe a foto da inspeção
+    const fotoInput = document.getElementById('foto_inspecao');
+    const fotoLabel = document.querySelector('label[for="foto_inspecao"]');
+
+    if (fotoInput && fotoLabel) {
+        fotoInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                // Se escolheu foto, muda o texto, coloca um check verde e pinta a borda
+                fotoLabel.innerHTML = ` ${this.files[0].name}`;
+                fotoLabel.style.borderColor = "green";
+                fotoLabel.style.color = "green";
+            } else {
+                // Se a pessoa cancelar a seleção da foto, volta ao normal
+                fotoLabel.innerHTML = `<img src="./assets/imagem-ficha/image-up.png" alt="ícone foto" width="20" height="20" /> Escolher imagem`;
+                fotoLabel.style.borderColor = "var(--cinza-borda)";
+                fotoLabel.style.color = "initial";
+            }
+        });
+    }
+
+
     // 2. Busca a lista de pontos no banco de dados e preenche o <select>
     await carregarPontos();
 

@@ -102,10 +102,16 @@ class QRCodeScanner {
             const res = await fetch(`http://localhost:3000/api/pontos/buscar-codigo/${codigo}`);
 
             if (res.ok) {
-                // Ponto existe!
+                const ponto = await res.json();
+                
+                if (ponto.ativo === false) {
+                    this.showFeedback(` ⚠️ Este ponto está inativo e não pode ser inspecionado. <br><span class="ponto-id">${codigo}</span>`, 'error');
+                    this.restartBtn.style.display = 'inline-flex';
+                    return;
+                }
+
                 this.showFeedback(` Ponto encontrado! Redirecionando... <br><span class="ponto-id">${codigo}</span>`, 'success');
                 
-                // Redireciona após 1.5 segundos (para o usuário conseguir ler a mensagem)
                 setTimeout(() => {
                     window.location.href = `nova_insp.html?codigo_ponto=${encodeURIComponent(codigo)}`;
                 }, 1500);
@@ -172,4 +178,14 @@ class QRCodeScanner {
 document.addEventListener('DOMContentLoaded', () => {
     const scanner = new QRCodeScanner();
     scanner.init();
+
+    // Esconder botão voltar do inspetor
+       const perfilLogado = localStorage.getItem('perfil');
+    // Verifica se existe perfil e se ele NÃO é o gestor
+    if (perfilLogado && perfilLogado.toLowerCase() !== 'gestor') {
+        const btnVoltar = document.querySelector('.btn-voltar');
+        if (btnVoltar) {
+            btnVoltar.style.display = 'none';
+        }
+    }
 });

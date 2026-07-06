@@ -3,19 +3,29 @@ const prisma = require('../prismaClient');
 
 const getResumo = async (req, res) => {
   try {
-    const totalPontos = await prisma.pontos_spda.count();
+   const totalPontos = await prisma.pontos_spda.count({
+  where: { ativo: true }
+});
 
-    const inspecoesConformes = await prisma.inspecoes.count({
-      where: { conformidade: true }
+        const inspecoesConformes = await prisma.inspecoes.count({
+      where: { 
+        conformidade: true,
+        pontos_spda: { ativo: true } // Só conta se estiver ativo
+      }
     });
 
     const inspecoesNaoConformes = await prisma.inspecoes.count({
-      where: { conformidade: false }
+      where: { 
+        conformidade: false,
+        pontos_spda: { ativo: true } // Só conta se estiver ativo
+      }
     });
 
-    // Novidade: Calculando a média direto no banco de dados!
+
+    // Calculando a média direto no banco de dados (ignorando pontos inativados)
     const mediaObj = await prisma.inspecoes.aggregate({
-      _avg: { resistencia_aterramento: true }
+      _avg: { resistencia_aterramento: true },
+      where: { pontos_spda: { ativo: true } }
     });
     const mediaResistencia = mediaObj._avg.resistencia_aterramento 
                            ? parseFloat(mediaObj._avg.resistencia_aterramento).toFixed(2)
@@ -24,7 +34,8 @@ const getResumo = async (req, res) => {
     const ultimasInspecoes = await prisma.inspecoes.findMany({
       take: 5,
       orderBy: { data_inspecao: 'desc' },
-      include: { pontos_spda: true }
+      include: { pontos_spda: true },
+      where: { pontos_spda: { ativo: true } } // Esconde do painel as inspeções de pontos inativos
     });
 
     res.json({

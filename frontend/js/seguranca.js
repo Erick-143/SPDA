@@ -22,11 +22,12 @@ else if (perfil) {
         'lista_pontos.html'
     ];
 
-    // Se um Inspetor tentar invadir uma página de Gestor:
-    if (perfil === 'inspetor' && paginasExclusivasGestor.includes(paginaAtual)) {
+    // Se quem não é Gestor tentar invadir uma página de Gestor:
+    if (perfil && perfil.toLowerCase() !== 'gestor' && paginasExclusivasGestor.includes(paginaAtual)) {
         alert(" Acesso Negado: Esta área é restrita a Gestores.");
         window.location.href = 'leitura.html'; // Joga ele de volta pra câmera
     }
+
 
     // Observação: O Gestor tem acesso livre a todas as telas (incluindo escanear e laudo)
 }
@@ -55,18 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (userAvatarElement && localStorage.getItem('fotoPerfil') && localStorage.getItem('fotoPerfil') !== "undefined") {
         userAvatarElement.src = localStorage.getItem('fotoPerfil');
         userAvatarElement.style.borderRadius = "50%"; // Deixa redondinha
-    }
-
-    // Transforma toda a área do perfil num botão de Sair seguro (Logout)
-    if (usuarioDiv) {
-        usuarioDiv.style.cursor = 'pointer';
-        usuarioDiv.title = "Clique para sair do sistema";
-
-        usuarioDiv.addEventListener('click', () => {
-            const desejaSair = confirm("Deseja realmente sair do Leitor SPDA?");
-            if (desejaSair) {
-                realizarLogout();
-            }
-        });
     }
 });

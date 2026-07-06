@@ -92,6 +92,10 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         const statusText = isConforme ? 'Conforme' : 'Não Conforme';
         const responsavel = insp.usuarios ? insp.usuarios.nome : `Equipe ${insp.usuario_id}`;
 
+        const linkFoto = insp.foto_url 
+            ? `<a href="http://localhost:3000${insp.foto_url}" target="_blank" style="color: blue; text-decoration: underline;">Ver Foto</a>` 
+            : 'Sem foto';
+
         tr.innerHTML = `
             <td>${new Date(insp.data_inspecao).toLocaleDateString('pt-BR')}</td>
             <td>${responsavel}</td>
@@ -99,6 +103,8 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
             <td>${insp.resistencia_aterramento !== null ? insp.resistencia_aterramento : '---'}</td>
             <td>${insp.condicao_visual || '---'}</td>
             <td class="${statusClass}">${statusText}</td>
+            <td>${insp.observacoes || '---'}</td>
+            <td>${linkFoto}</td>
         `;
         corpoTabela.appendChild(tr);
     });

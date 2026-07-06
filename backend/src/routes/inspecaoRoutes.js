@@ -4,7 +4,19 @@ const router = express.Router();
 const multer = require('multer');
 const inspecaoController = require('../controllers/inspecaoController');
 
-const upload = multer({ dest: 'uploads/' });
+// Salvar em (.jpg, .png)
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Pasta onde vai salvar
+  },
+  filename: function (req, file, cb) {
+    const extensao = file.originalname.split('.').pop();
+    cb(null, `foto_${Date.now()}.${extensao}`);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 
 // POST para cadastrar o laudo
 router.post('/', upload.single('foto'), inspecaoController.createInspecao);

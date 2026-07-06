@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              ` ${impacto.unidades} Unidades\n` +
                              ` ${impacto.areas} Áreas\n` +
                              ` ${impacto.pontos} Pontos de Inspeção\n\n` +
-                             `Deseja continuar e mover tudo para o Arquivo Morto?`;
+                             `Deseja continuar e mover tudo para Arquivos Inativos?`;
                              
             // Passo 3: Exibe o Alerta. Se o usuário clicar em Cancelar, o código para aqui.
             if(!confirm(mensagem)) return;

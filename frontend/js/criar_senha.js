@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const msgRetorno = document.getElementById('msg-retorno');
 
 function mostrarMensagem(texto, tipo) {
-    const iconSrc = tipo === 'erro' ? './assets/imagem-ficha/check.png' : './assets/imagem-ficha/x.png';
+   const iconSrc = tipo === 'erro' ? './assets/imagem-ficha/x.png' : './assets/imagem-ficha/check.png';
     
     msgRetorno.innerHTML = `<img src="${iconSrc}" class="msg-icon" alt="status"> ${texto}`;
     msgRetorno.className = tipo;
