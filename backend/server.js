@@ -21,6 +21,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads')); //adicionei agora se der erro é ela 
 app.use('/public', express.static('public'));
 
 // 📍 Rota de Teste de Vida

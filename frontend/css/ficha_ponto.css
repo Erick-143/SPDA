@@ -346,43 +346,6 @@ table tr:hover {
     transform: translateY(-2px);
 }
 
-@media print {
-    /* Esconde elementos indesejados */
-    nav, .btn-voltar, #botoes-impressao, .btn-nova-inspecao, footer {
-        display: none !important;
-    }
-
-    /* Força o layout a ocupar a folha inteira e impede cortes */
-    body {
-        background: white !important;
-        padding: 0 !important;
-    }
-
-    .principal {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding: 0 !important;
-    }
-
-    .grid-ficha {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important; /* Mantém as 3 colunas */
-        gap: 10px !important;
-    }
-
-    .cartao {
-        border: 1px solid #ddd !important;
-        box-shadow: none !important;
-        page-break-inside: avoid !important;
-    }
-
-    .historico-container {
-        border: 1px solid #ddd !important;
-        box-shadow: none !important;
-        margin-top: 20px !important;
-    }
-}
-
 @media (max-width: 900px) {
     .grid-ficha {
         grid-template-columns: 1fr 1fr;
