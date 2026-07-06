@@ -161,6 +161,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
     `;
 }
 
+//Gera o PDF de forma semelhante a impressão
 function gerarPDF() {
     window.print();
 }
