@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { listarUnidades, criarUnidade, excluirUnidade, calcularImpactoUnidade, listarUnidadesInativas, reativarUnidade } = require('../controllers/unidadeController');
+router.get('/', listarUnidades);
+router.get('/inativos', listarUnidadesInativas);
+router.get('/:id/impacto', calcularImpactoUnidade);
+router.post('/', criarUnidade);
+router.delete('/:id', excluirUnidade);
+router.put('/:id/reativar', reativarUnidade);
+module.exports = router;

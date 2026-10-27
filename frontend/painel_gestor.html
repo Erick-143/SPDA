@@ -1,0 +1,105 @@
+<!--Primeiro aspecto visual para o usuário-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel = "stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src = "./js/script.js"></script>
+        <script src="./js/seguranca.js"></script>
+
+</head>
+<body>
+    <nav>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span> 
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor 
+                <span>SPDA</span>
+            </div>
+        </a>
+        <div class = "usuario">
+            <span id = "user-name">Equipe 1</span>
+            <div class = "usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <section class = "central">
+        <div class = "central-texto">
+            <h1>Rastreabilidade Digital</h1>
+            <p>Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.</p>
+            <a href = "leitura.html" class = "btn-primario"> <img src="./assets/images-index/qr-code.png" alt="Ícone QR Code" width="24" height="24" class="btn-icon"> Escanear QR Code</a>
+        </div>
+    </section>
+
+    <main class = "menu-principal">
+        <div class = "opc-menu">
+            <a href = "cadastro_ponto.html" class = "cadastro">
+                <span class = "cadastro-icon">
+                    <img src ="./assets/images-index/square-mouse-pointer.png" alt="ícone cadastro" width="50" height="50">
+                </span>
+                <h3>Cadastrar pontos</h3>
+                <p>Adicionar um novo ponto de SPDA ao sistema.</p>
+            </a>
+
+            <a href="./lista_pontos.html " class = "cadastro">
+                <span class = "cadastro-icon">
+                    <img src="./assets/images-index/listaPontos.png" alt="ícone lista" width="50" height="50">
+                </span>
+                <h3>Lista de pontos</h3>
+                <p>Visualize o histórico dos pontos cadastrados de SPDA</p>
+            </a>
+
+            <a href="./nova_insp.html " class = "cadastro">
+                <span class = "cadastro-icon"> 
+                    <img src="./assets/images-index/novaInspecao.png" alt ="ícone nova inspeção" width="50" height="50">
+                </span>
+                <h3>Nova inspeção</h3>
+                <p>Registro de nova inspeção manual.</p>
+            </a>
+
+            <a href="./configuracoes.html " class = "cadastro">
+                <span class = "cadastro-icon"> 
+                    <img src="./assets/images-index/cog.png" alt = "ícone de configurações" width="50" height="50">
+                </span>
+                <h3>Configurações</h3>
+                <p>Gerenciamento de clientes, áreas e tipos de ponto.</p>
+            </a>
+
+                        <a href="./inativos.html" class="cadastro">
+                <span class="cadastro-icon"> 
+                    <img src="./assets/images-index/box_azul_inativos.png" alt="ícone arquivo morto" width="50" height="50">
+                </span>
+                <h3>Arquivos Inativos</h3>
+                <p>Gerencie e restaure informações inativadas do sistema.</p>
+            </a>
+
+        </div>
+
+        <h2 class = "ind-titulo">Indicadores gerais:</h2>
+        <div class = "opc-ind">
+            <div class = "cards-ind">
+                <div class = "numero-ind" id="total-pontos"> <!--Inserir os dados do banco de dados aqui--> </div>
+                <div class = "subt-ind">Total de pontos</div>
+            </div>
+            <div class = "cards-ind">
+                <div class = "numero-ind" id="pontos-conformes"> <!--Inserir os dados do banco de dados aqui--> </div>
+                <div class = "subt-ind">Pontos conformes</div>
+            </div>
+            <div class = "aviso-ind">
+                <div class = "numero-ind" id="pontos-nao-conformes"> <!--Inserir os dados do banco de dados aqui--> </div>
+                <div class = "subt-ind">Não conformes</div>
+            </div>
+            <div class = "cards-ind">
+                <div class = "numero-ind" id="resistencia-media"> <!--Inserir os dados do banco de dados aqui--> </div>
+                <div class = "subt-ind">Resistência média</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

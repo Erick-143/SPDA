@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha do Ponto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="./js/qrcode.js"></script>
+    <link rel="stylesheet" href="./css/ficha_ponto.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <script src="./js/ficha_ponto.js"></script>
+    <script src="./js/seguranca.js"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span>
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor
+                <span>SPDA</span>
+            </div>
+        </a>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal" id="conteudo-pdf">
+
+        <div class="cabecalho">
+            <div class="cabecalho-info">
+                <h1>Ficha Técnica do Ponto</h1>
+                <p>Visualize todos os dados, medições e histórico deste ponto de SPDA.</p>
+            </div>
+            <a href="lista_pontos.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar para Lista
+            </a>
+        </div>
+
+        <div class="destaque-container">
+            <div class="codigo-destaque">
+                <small>Ponto de Inspeção</small>
+                <h2 id="ponto-codigo">Carregando...</h2>
+            </div>
+            <div class="status-geral" id="ponto-status-container">
+            </div>
+        </div>
+
+        <div class="grid-ficha">
+            <div class="cartao">
+                <h3>
+                    <img src="./assets/imagem-listagem/map-pin.png" alt="icone de mapa" width="20" height="20">
+                    Localização
+                </h3>
+                <div class="linha-info">
+                    <span class="rotulo">Área</span>
+                    <span class="valor" id="ponto-area">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Unidade</span>
+                    <span class="valor" id="ponto-unidade">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Localização</span>
+                    <span class="valor" id="ponto-localizacao">---</span>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <h3>
+                    <img src="./assets/imagem-ficha/info.png" alt="icone de informações" width="20" height="20">
+                    Características
+                </h3>
+                <div class="linha-info">
+                    <span class="rotulo">Tipo de Ponto</span>
+                    <span class="valor" id="ponto-tipo">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Cliente</span>
+                    <span class="valor" id="ponto-cliente">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Criticidade</span>
+                    <span class="valor" id="ponto-criticidade">---</span>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <h3>
+                    <img src="./assets/imagem-ficha/chart-no-axes-combined.png" alt="icone de medição" width="20" height="20">
+                    Última Medição
+                </h3>
+                <div class="linha-info">
+                    <span class="rotulo">Data</span>
+                    <span class="valor" id="medicao-data">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Continuidade (mΩ)</span>
+                    <span class="valor" id="medicao-continuidade">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Resistência (Ω)</span>
+                    <span class="valor" id="medicao-resistencia">---</span>
+                </div>
+                <div class="linha-info">
+                    <span class="rotulo">Cond. Visual</span>
+                    <span class="valor" id="medicao-visual">---</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="historico-container">
+            <div class="historico-header">
+                <h3>
+                    <img src="./assets/imagem-ficha/clipboard-clock.png" alt="icon historico" width="20" height="20">
+                    Histórico de Inspeções
+                </h3>
+                <span style="color: #01257D; font-size: 0.9rem;" id="total-registros">Total: 0 registros</span>
+            </div>
+
+            <div class="tabela-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Responsável</th>
+                            <th>Continuidade (mΩ)</th>
+                            <th>Resistência (Ω)</th>
+                            <th>Cond. Visual</th>
+                            <th>Status</th>
+                              <th>Observações</th>
+                            <th>Anexo</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela-historico">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="botoes-impressao" style="margin-top: 1.5rem; display: flex; gap: 10px; justify-content: flex-end;">
+
+                <button class="btn-acao-secundaria" onclick="gerarPDF()">
+                    <img src="./assets/imagem-ficha/file-text.png" alt="icone lista pdf" width="20" height="20">
+                    Gerar PDF
+                </button>
+                <button class="btn-acao-secundaria" onclick="window.print()">
+                    <img src="./assets/imagem-qrcode/printer.png" alt="icone de seta" width="20" height="20">
+                    Imprimir
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+
+                <h3><img class="logo-branca" src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                    Leitor SPDA</h3>
+                <p>
+                    Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Manual do Sistema</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">Contato Técnico</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Email</p>
+                <p>Numero</p>
+                <p>Dias de Funcionamento</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Leitor SPDA. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="#">Termos de uso</a>
+                <span>|</span>
+                <a href="#">Política de privacidade</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

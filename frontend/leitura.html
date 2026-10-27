@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scanner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/scanner.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="./js/leitura.js" defer></script>
+    <script src="./js/seguranca.js"></script>
+
+</head>
+
+<body>
+    <nav>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span>
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor
+                <span>SPDA</span>
+            </div>
+        </a>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1 class="titulo-image">
+                <img src="./assets/images-leitura/scan-qr-code.png" alt="teclado" width="40" height="40">
+                Escaneie o QR Code
+            </h1>
+            <a href="painel_gestor.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+
+        <div class="area-scanner">
+            <div id="leitura"></div>
+
+            <div id="carrega-camera">
+                <div class="passada"></div>
+                <p>Iniciando câmera</p>
+            </div>
+
+            <div id="resultado"></div>
+
+            <div class="acao-scanner">
+                <button id="btn-ent-manual" class="btn-seg">
+                    <img src="./assets/images-leitura/square-arrow-right-enter.png" alt="teclado" width="20"
+                        height="20">
+                    Inserir código manualmente
+                </button>
+                <button id="reload-btn-scanner" class="btn-seg" style="display: none;">
+                    <img src="./assets/images-leitura/rotate-cw.png" alt="imagem reload" width="20" height="20">
+                    Tentar Novamente
+            </div>
+
+            <div class="int-scanner">
+                <p>Aponte a câmera para o QR Code do ponto SPDA</p>
+                <p class="msg-pqn">Autorize o acesso à câmera quando solicitado</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+
+                <h3><img class="logo-branca" src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                    Leitor SPDA</h3>
+                <p>
+                    Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.
+                </p>
+            </div>
+
+            <!--<div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#">Cadastrar pontos</a></li>
+                <li><a href="#">Lista de pontos</a></li>
+                <li><a href="#">Nova inspeção</a></li>
+                <li><a href="#">Configurações</a></li>
+            </ul>
+        </div>!-->
+
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Manual do Sistema</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">Contato Técnico</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Email</p>
+                <p>Numero</p>
+                <p>Dias de Funcionamento</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Leitor SPDA. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="#">Termos de uso</a>
+                <span>|</span>
+                <a href="#">Política de privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

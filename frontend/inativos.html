@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquivos Inativos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/config.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <script src="./js/seguranca.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span> 
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor 
+                <span>SPDA</span>
+            </div>
+        </a>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1>Arquivo Morto (Inativos)</h1>
+            <a href="painel_gestor.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+        <div class="formulario">
+            <div class="tab-cntd">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="tab-clientes-inativos">Clientes Inativos</button>
+                    <button class="tab-btn" data-tab="tab-unidades-inativas">Unidades Inativas</button>
+                    <button class="tab-btn" data-tab="tab-areas-inativas">Áreas Inativas</button>
+                    <button class="tab-btn" data-tab="tab-tipos-inativos">Tipos de Ponto Inativos</button>
+                    <button class="tab-btn" data-tab="tab-pontos-inativos">Pontos SPDA Inativos</button>
+                </div>
+
+                <div id="tab-clientes-inativos" class="tab-ctt active">
+                    <div class="lista-itens">
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Estes clientes foram inativados. Restaure-os clicando em Reativar.</h3>
+                        <div id="clientes-inativos-render"></div>
+                    </div>
+                </div>
+
+                <div id="tab-unidades-inativas" class="tab-ctt">
+                    <div class="lista-itens">
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Unidades inativadas</h3>
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">(Dica: Se a unidade foi inativada por causa do cliente, reative o cliente primeiro).</h3>
+                        <div id="unidades-inativas-render"></div>
+                    </div>
+                </div>
+
+                <div id="tab-areas-inativas" class="tab-ctt">
+                    <div class="lista-itens">
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Áreas inativadas.</h3>
+                        <div id="areas-inativas-render"></div>
+                    </div>
+                </div>
+
+                <div id="tab-tipos-inativos" class="tab-ctt">
+                    <div class="lista-itens">
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Tipos de Ponto inativados.</h3>
+                        <div id="tipos-inativos-render"></div>
+                    </div>
+                </div>
+
+                <!-- Aba Pontos -->
+                <div id="tab-pontos-inativos" class="tab-ctt">
+                    <div class="lista-itens">
+                        <h3 style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">Pontos de SPDA inativados.</h3>
+                        <div id="pontos-inativos-render"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mensagem-feedback-inativos"></div>
+        </div>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3><img class="logo-branca" src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                    Leitor SPDA</h3>
+                <p>
+                    Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Manual do Sistema</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">Contato Técnico</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Email</p>
+                <p>Numero</p>
+                <p>Dias de Funcionamento</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Leitor SPDA. Todos os direitos reservados.</span>
+            <div>
+                <a href="#">Termos de uso</a>
+                <span>|</span>
+                <a href="#">Política de privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica das Abas
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-ctt');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    button.classList.add('active');
+                    document.getElementById(button.getAttribute('data-tab')).classList.add('active');
+                });
+            });
+
+            const msgFeedback = document.getElementById('mensagem-feedback-inativos');
+
+            function mostrarFeedback(msg) {
+                msgFeedback.innerText = msg;
+                msgFeedback.style.color = "#28a745";
+                msgFeedback.style.fontWeight = "bold";
+                msgFeedback.style.padding = "10px";
+                setTimeout(() => { msgFeedback.innerText = ""; }, 3000);
+            }
+
+            const renderInativosCli = document.getElementById('clientes-inativos-render');
+            async function carregarClientesInativos() {
+                try {
+                    const res = await fetch('http://localhost:3000/api/clientes/inativos');
+                    const clientes = await res.json();
+                    renderInativosCli.innerHTML = clientes.length ? '' : '<p>Lixeira vazia.</p>';
+                    
+                    clientes.forEach(c => {
+                        const div = document.createElement('div');
+                        div.className = "card-inativo";
+                        div.innerHTML = `
+                            <div class="card-info">
+                                <strong>${c.nome}</strong> 
+                                <span>(${c.sigla})</span>
+                            </div>
+                            <div class="card-actions">
+                                <span class="badge-inativo">Inativo</span>
+                                <button onclick="reativarCliente(${c.id})" class="btn-reativar"> Reativar</button>
+                            </div>
+                        `;
+                        renderInativosCli.appendChild(div);
+                    });
+                } catch (e) {
+                    renderInativosCli.innerHTML = '<p>Erro ao carregar lixeira.</p>';
+                }
+            }
+
+            window.reativarCliente = async function(id) {
+                const resImpacto = await fetch(`http://localhost:3000/api/clientes/${id}/impacto`);
+                const impacto = await resImpacto.json();
+                
+                const mensagem = ` Deseja reativar este Cliente?\n\nAo reativar este cliente, você também trará de volta ao sistema:\n` +
+                                 ` ${impacto.unidades} Unidades\n` +
+                                 ` ${impacto.areas} Áreas\n` +
+                                 ` ${impacto.pontos} Pontos de Inspeção.`;
+
+                if(!confirm(mensagem)) return;
+
+                const res = await fetch(`http://localhost:3000/api/clientes/${id}/reativar`, { method: 'PUT' });
+                if(res.ok) { 
+                    mostrarFeedback("Cliente restaurado!"); 
+                    carregarClientesInativos(); 
+                }
+            };
+
+            const renderInativosUni = document.getElementById('unidades-inativas-render');
+            async function carregarUnidadesInativas() {
+                try {
+                    const res = await fetch('http://localhost:3000/api/unidades/inativos');
+                    const unidades = await res.json();
+                    renderInativosUni.innerHTML = unidades.length ? '' : '<p>Lixeira vazia.</p>';
+                    
+                    unidades.forEach(u => {
+                        const div = document.createElement('div');
+                        div.className = "card-inativo";
+                        div.innerHTML = `
+                            <div class="card-info">
+                                <strong>${u.nome}</strong>
+                            </div>
+                            <div class="card-actions">
+                                <span class="badge-inativo">Inativo</span>
+                                <button onclick="reativarUnidade(${u.id})" class="btn-reativar"> Reativar</button>
+                            </div>
+                        `;
+                        renderInativosUni.appendChild(div);
+                    });
+                } catch (e) {
+                    renderInativosUni.innerHTML = '<p>Erro ao carregar lixeira.</p>';
+                }
+            }
+
+            window.reativarUnidade = async function(id) {
+                const resImpacto = await fetch(`http://localhost:3000/api/unidades/${id}/impacto`);
+                const impacto = await resImpacto.json();
+                
+                const mensagem = ` Deseja reativar esta Unidade?\n\nAo reativar esta unidade, você também trará de volta:\n` +
+                                 ` ${impacto.areas} Áreas\n` +
+                                 ` ${impacto.pontos} Pontos de Inspeção.`;
+
+                if(!confirm(mensagem)) return;
+
+                const res = await fetch(`http://localhost:3000/api/unidades/${id}/reativar`, { method: 'PUT' });
+                if(res.ok) { 
+                    mostrarFeedback("Unidade restaurada!"); 
+                    carregarUnidadesInativas(); 
+                }
+            };
+
+            // ================= ÁREAS =================
+            const renderInativosArea = document.getElementById('areas-inativas-render');
+            async function carregarAreasInativas() {
+                try {
+                    const res = await fetch('http://localhost:3000/api/areas/inativos');
+                    const areas = await res.json();
+                    renderInativosArea.innerHTML = areas.length ? '' : '<p>Lixeira vazia.</p>';
+                    
+                    areas.forEach(a => {
+                        const div = document.createElement('div');
+                        div.className = "card-inativo";
+                        div.innerHTML = `
+                            <div class="card-info">
+                                <strong>${a.nome}</strong> 
+                                <span>(${a.sigla})</span>
+                            </div>
+                            <div class="card-actions">
+                                <span class="badge-inativo">Inativo</span>
+                                <button onclick="reativarArea(${a.id})" class="btn-reativar"> Reativar</button>
+                            </div>
+                        `;
+                        renderInativosArea.appendChild(div);
+                    });
+                } catch(e) {
+                    renderInativosArea.innerHTML = '<p>Erro ao carregar lixeira.</p>';
+                }
+            }
+
+            window.reativarArea = async function(id) {
+                const resImpacto = await fetch(`http://localhost:3000/api/areas/${id}/impacto`);
+                const impacto = await resImpacto.json();
+                
+                const mensagem = ` Deseja reativar esta Área?\n\nAo reativar esta área, você também trará de volta:\n` +
+                                 ` ${impacto.pontos} Pontos de Inspeção.`;
+
+                if(!confirm(mensagem)) return;
+
+                const res = await fetch(`http://localhost:3000/api/areas/${id}/reativar`, { method: 'PUT' });
+                if(res.ok) { 
+                    mostrarFeedback("Área restaurada!"); 
+                    carregarAreasInativas(); 
+                }
+            };
+
+            // ================= TIPOS =================
+            const renderInativosTipo = document.getElementById('tipos-inativos-render');
+            async function carregarTiposInativos() {
+                try {
+                    const res = await fetch('http://localhost:3000/api/tipos/inativos');
+                    const tipos = await res.json();
+                    renderInativosTipo.innerHTML = tipos.length ? '' : '<p>Lixeira vazia.</p>';
+                    
+                    tipos.forEach(t => {
+                        const div = document.createElement('div');
+                        div.className = "card-inativo";
+                        div.innerHTML = `
+                            <div class="card-info">
+                                <strong>${t.nome}</strong>
+                            </div>
+                            <div class="card-actions">
+                                <span class="badge-inativo">Inativo</span>
+                                <button onclick="reativarTipo(${t.id})" class="btn-reativar"> Reativar</button>
+                            </div>
+                        `;
+                        renderInativosTipo.appendChild(div);
+                    });
+                } catch(e) {
+                    renderInativosTipo.innerHTML = '<p>Erro ao carregar lixeira.</p>';
+                }
+            }
+
+            window.reativarTipo = async function(id) {
+                if(!confirm("Deseja reativar este tipo?")) return;
+                const res = await fetch(`http://localhost:3000/api/tipos/${id}/reativar`, { method: 'PUT' });
+                if(res.ok) { mostrarFeedback("Tipo restaurado!"); carregarTiposInativos(); }
+            };
+
+            // ================= PONTOS SPDA =================
+            const renderInativosPonto = document.getElementById('pontos-inativos-render');
+            async function carregarPontosInativos() {
+                try {
+                    const res = await fetch('http://localhost:3000/api/pontos/inativos');
+                    const pontos = await res.json();
+                    renderInativosPonto.innerHTML = pontos.length ? '' : '<p>Lixeira vazia.</p>';
+                    
+                    pontos.forEach(p => {
+                        const div = document.createElement('div');
+                        div.className = "card-inativo";
+                        div.innerHTML = `
+                            <div class="card-info">
+                                <strong>${p.codigo_unico}</strong> 
+                                <span>- ${p.cliente?.sigla || ''} / ${p.area?.nome || ''}</span>
+                            </div>
+                            <div class="card-actions">
+                                <span class="badge-inativo">Inativo</span>
+                                <button onclick="reativarPonto(${p.id})" class="btn-reativar"> Reativar</button>
+                            </div>
+                        `;
+                        renderInativosPonto.appendChild(div);
+                    });
+                } catch(e) {
+                    renderInativosPonto.innerHTML = '<p>Erro ao carregar lixeira.</p>';
+                }
+            }
+
+            window.reativarPonto = async function(id) {
+                if(!confirm("Deseja reativar este ponto de SPDA?")) return;
+                const res = await fetch(`http://localhost:3000/api/pontos/${id}/reativar`, { method: 'PUT' });
+                if(res.ok) { mostrarFeedback("Ponto restaurado!"); carregarPontosInativos(); }
+            };
+
+            // Inicializa carregando todas as lixeiras
+            carregarClientesInativos();
+            carregarUnidadesInativas();
+            carregarAreasInativas();
+            carregarTiposInativos();
+            carregarPontosInativos();
+        });
+    </script>
+</body>
+</html>

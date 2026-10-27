@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Pontos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/forms.css">
+    <link rel="stylesheet" href="./css/footer.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="./js/qrcode.js"></script>
+    <script src="./js/cadastro.js"></script>
+    <script src="./js/seguranca.js"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="painel_gestor.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">
+                <span></span>
+                <img src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                Leitor
+                <span>SPDA</span>
+            </div>
+        </a>
+        <div class="usuario">
+            <span id="user-name">Equipe 1</span>
+            <div class="usuario-avatar">
+                <img src="./assets/images-index/iconUsuario.png" alt="icone usuário" width="45" height="45">
+            </div>
+        </div>
+    </nav>
+
+    <main class="principal">
+        <div class="titulo">
+            <h1>Cadastrar novo ponto</h1>
+            <a href="painel_gestor.html" class="btn-voltar">
+                <img src="./assets/images-cadastro-pt/move-left.png" alt="icone de seta" width="20" height="20">
+                Voltar
+            </a>
+        </div>
+
+        <div class="formulario">
+            <form id="form-cadastro-ponto">
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="cliente">Cliente *</label>
+                        <select id="cliente" required>
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="unidade">Unidade *</label>
+                        <select id="unidade" required>
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="area">Área *</label>
+                        <select id="area" required>
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                    <div class="grup-form">
+                        <label for="tipo_ponto">Tipo de ponto *</label>
+                        <select id="tipo_ponto" required>
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="localizacao">Localização *</label>
+                        <input type="text" id="localizacao" placeholder="Ex: próximo ao Tanque 09" required>
+                    </div>
+                    <div class="grup-form">
+                        <label for="criticidade">Criticidade *</label>
+                        <select id="criticidade" required>
+                            <option value="">Selecione</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Média</option>
+                            <option value="Baixa">Baixa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-campo">
+                    <div class="grup-form">
+                        <label for="status">Status *</label>
+                        <select id="status" required>
+                            <option value="">Selecione</option>
+                            <option value="0">Inativo</option>
+                            <option value="1">Ativo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grup-form">
+                    <label for="descricao">Descrição do Ponto:</label>
+                    <textarea id="descricao" placeholder="Descreva as características do ponto de SPDA..."></textarea>
+                </div>
+
+                <div class="grup-form">
+                    <label for="observacao">Observações:</label>
+                    <textarea id="observacao" placeholder="Insira as observações referentes ao ponto..."></textarea>
+                </div>
+
+                <div class="grup-form">
+                    <label>Codigo único gerado automaticamente:</label>
+                    <div class="gerador-cod" id="codigo-gerado"><!--automatizar o processo--></div>
+                    <small style="color: #777; display: block; margin-top: 5px;">* O código é gerado automaticamente
+                        pelo servidor com base nas siglas escolhidas</small>
+                </div>
+
+                <div class="form-ac">
+                    <button type="button" class="btn-seg"
+                        onclick="document.getElementById('form-cadastro-ponto').reset(); document.getElementById('codigo-gerado').innerText = '';">Limpar</button>
+                    <button type="submit" class="btn-pri">
+                        <img src="./assets/images-cadastro-pt/save-check.png" alt="icone de seta" width="20"
+                            height="20">
+                        Salvar Ponto
+                    </button>
+                </div>
+            </form>
+
+            <div id="mensagem-feedback"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+
+                <h3><img class="logo-branca" src="./assets/logo-zap.png" alt="logo principal" width="25" height="25">
+                    Leitor SPDA</h3>
+                <p>
+                    Sistema de inspeção SPDA via QR code. Gerencia seus pontos de forma inteligente.
+                </p>
+            </div>
+
+            <!--<div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#">Cadastrar pontos</a></li>
+                <li><a href="#">Lista de pontos</a></li>
+                <li><a href="#">Nova inspeção</a></li>
+                <li><a href="#">Configurações</a></li>
+            </ul>
+        </div>!-->
+
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Manual do Sistema</a></li>
+                    <li><a href="#">Documentação</a></li>
+                    <li><a href="#">Contato Técnico</a></li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>Email</p>
+                <p>Numero</p>
+                <p>Dias de Funcionamento</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Leitor SPDA. Todos os direitos reservados.</span>
+
+            <div>
+                <a href="#">Termos de uso</a>
+                <span>|</span>
+                <a href="#">Política de privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
