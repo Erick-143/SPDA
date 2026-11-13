@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function carregarOpcoes() {
     try {
-        const res = await fetch('http://localhost:3000/api/auxiliar/dados-cadastro');
+        const res = await fetch('https://spda-buco.onrender.com/api/auxiliar/dados-cadastro');
 
         if (!res.ok) {
             console.error('Erro ao carregar dados do banco:', res.status);
@@ -150,7 +150,7 @@ async function gerarCodigoPreview() {
 
     try {
         // Consulta no banco o próximo número incremental disponível
-        const res = await fetch(`http://localhost:3000/api/pontos/proximo-numero?area_id=${areaId}&tipo_ponto_id=${tipoId}`);
+        const res = await fetch(`https://spda-buco.onrender.com/api/pontos/proximo-numero?area_id=${areaId}&tipo_ponto_id=${tipoId}`);
 
         if (!res.ok) {
             console.error('Erro ao buscar próximo número no servidor');
@@ -217,7 +217,7 @@ async function salvarPonto(e) {
 
     try {
         // Realiza a requisição POST real para salvar os dados no banco via Prisma
-        const res = await fetch('http://localhost:3000/api/pontos', {
+        const res = await fetch('https://spda-buco.onrender.com/api/pontos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dadosEnvio)

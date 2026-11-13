@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Função para carregar e listar os clientes
     async function carregarClientes() {
         try {
-            const res = await fetch('http://localhost:3000/api/clientes');
+            const res = await fetch('https://spda-buco.onrender.com/api/clientes');
             const clientes = await res.json();
             
             renderClientes.innerHTML = ''; // Limpa a lista
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sigla = document.getElementById('cliente_sigla').value;
 
             try {
-                const res = await fetch('http://localhost:3000/api/clientes', {
+                const res = await fetch('https://spda-buco.onrender.com/api/clientes', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome, sigla })
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.inativarCliente = async function(id) {
         try {
             // Passo 1: Pergunta pro backend o tamanho do impacto
-            const resImpacto = await fetch(`http://localhost:3000/api/clientes/${id}/impacto`);
+            const resImpacto = await fetch(`https://spda-buco.onrender.com/api/clientes/${id}/impacto`);
             if(!resImpacto.ok) throw new Error("Erro ao calcular impacto");
             
             const impacto = await resImpacto.json();
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Passo 3: Exibe o Alerta. Se o usuário clicar em Cancelar, o código para aqui.
             if(!confirm(mensagem)) return;
             // Passo 4: Se o usuário confirmar, faz a inativação
-            const res = await fetch(`http://localhost:3000/api/clientes/${id}`, {
+            const res = await fetch(`https://spda-buco.onrender.com/api/clientes/${id}`, {
                 method: 'DELETE' // Chama o Soft Delete
             });
             if(res.ok) {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar a caixinha de seleção com os clientes disponíveis
     async function popularSelectClientes() {
         try {
-            const res = await fetch('http://localhost:3000/api/clientes');
+            const res = await fetch('https://spda-buco.onrender.com/api/clientes');
             const clientes = await res.json();
             
             selectUnidadeCliente.innerHTML = '<option value="">Selecione um cliente:</option>';
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar a lista de unidades na tela
     async function carregarUnidades() {
         try {
-            const res = await fetch('http://localhost:3000/api/unidades');
+            const res = await fetch('https://spda-buco.onrender.com/api/unidades');
             const unidades = await res.json();
             
             renderUnidades.innerHTML = ''; 
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nome = document.getElementById('unidade_nome').value;
 
             try {
-                const res = await fetch('http://localhost:3000/api/unidades', {
+                const res = await fetch('https://spda-buco.onrender.com/api/unidades', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ cliente_id, nome })
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função Global para Inativar Unidade (Com Análise de Impacto)
     window.inativarUnidade = async function(id) {
         try {
-            const resImpacto = await fetch(`http://localhost:3000/api/unidades/${id}/impacto`);
+            const resImpacto = await fetch(`https://spda-buco.onrender.com/api/unidades/${id}/impacto`);
             if(!resImpacto.ok) throw new Error("Erro ao calcular impacto");
             
             const impacto = await resImpacto.json();
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              
             if(!confirm(mensagem)) return;
 
-            const res = await fetch(`http://localhost:3000/api/unidades/${id}`, { method: 'DELETE' });
+            const res = await fetch(`https://spda-buco.onrender.com/api/unidades/${id}`, { method: 'DELETE' });
 
             if(res.ok) {
                 mostrarFeedback('Unidade inativada com sucesso.', 'success');
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar as unidades disponíveis no select
     async function popularSelectUnidades() {
         try {
-            const res = await fetch('http://localhost:3000/api/unidades');
+            const res = await fetch('https://spda-buco.onrender.com/api/unidades');
             const unidades = await res.json();
             
             selectAreaUnidade.innerHTML = '<option value="">Selecione uma unidade:</option>';
@@ -290,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar a lista de áreas na tela
     async function carregarAreas() {
         try {
-            const res = await fetch('http://localhost:3000/api/areas');
+            const res = await fetch('https://spda-buco.onrender.com/api/areas');
             const areas = await res.json();
             
             renderAreas.innerHTML = ''; 
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sigla = document.getElementById('area_sigla').value;
 
             try {
-                const res = await fetch('http://localhost:3000/api/areas', {
+                const res = await fetch('https://spda-buco.onrender.com/api/areas', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ unidade_id, nome, sigla })
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função Global para Inativar Área (Com Análise de Impacto)
     window.inativarArea = async function(id) {
         try {
-            const resImpacto = await fetch(`http://localhost:3000/api/areas/${id}/impacto`);
+            const resImpacto = await fetch(`https://spda-buco.onrender.com/api/areas/${id}/impacto`);
             if(!resImpacto.ok) throw new Error("Erro ao calcular impacto");
             
             const impacto = await resImpacto.json();
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              
             if(!confirm(mensagem)) return;
 
-            const res = await fetch(`http://localhost:3000/api/areas/${id}`, { method: 'DELETE' });
+            const res = await fetch(`https://spda-buco.onrender.com/api/areas/${id}`, { method: 'DELETE' });
 
             if(res.ok) {
                 mostrarFeedback('Área inativada com sucesso.', 'success');
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar a lista de tipos na tela
     async function carregarTipos() {
         try {
-            const res = await fetch('http://localhost:3000/api/tipos');
+            const res = await fetch('https://spda-buco.onrender.com/api/tipos');
             const tipos = await res.json();
             
             renderTipos.innerHTML = ''; 
@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const nome = document.getElementById('tipo_nome').value;
             const sigla = document.getElementById('tipo_sigla').value;
             try {
-                const res = await fetch('http://localhost:3000/api/tipos', {
+                const res = await fetch('https://spda-buco.onrender.com/api/tipos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome, sigla })
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função Global para Inativar Tipo (Com Análise de Impacto)
     window.inativarTipo = async function(id) {
         try {
-            const resImpacto = await fetch(`http://localhost:3000/api/tipos/${id}/impacto`);
+            const resImpacto = await fetch(`https://spda-buco.onrender.com/api/tipos/${id}/impacto`);
             if(!resImpacto.ok) throw new Error("Erro ao calcular impacto");
             
             const impacto = await resImpacto.json();
@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
                              `Deseja continuar?`;
                              
             if(!confirm(mensagem)) return;
-            const res = await fetch(`http://localhost:3000/api/tipos/${id}`, { method: 'DELETE' });
+            const res = await fetch(`https://spda-buco.onrender.com/api/tipos/${id}`, { method: 'DELETE' });
             if(res.ok) {
                 mostrarFeedback('Tipo inativado com sucesso.', 'success');
                 carregarTipos();

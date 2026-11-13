@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function carregarDadosDaFicha(codigo) {
     try {
-        const res = await fetch(`http://localhost:3000/api/pontos/buscar-codigo/${codigo}`);
+        const res = await fetch(`https://spda-buco.onrender.com/api/pontos/buscar-codigo/${codigo}`);
 
         if (!res.ok) {
             if (res.status === 404) {
@@ -93,7 +93,7 @@ function renderizarInspecoes(inspecoes, statusPonto, codigoPonto) {
         const responsavel = insp.usuarios ? insp.usuarios.nome : `Equipe ${insp.usuario_id}`;
 
         const linkFoto = insp.foto_url 
-            ? `<a href="http://localhost:3000${insp.foto_url}" target="_blank" style="color: blue; text-decoration: underline;">Ver Foto</a>` 
+            ? `<a href="https://spda-buco.onrender.com${insp.foto_url}" target="_blank" style="color: blue; text-decoration: underline;">Ver Foto</a>` 
             : 'Sem foto';
 
         tr.innerHTML = `

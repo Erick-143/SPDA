@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/dashboard');
+        const res = await fetch('https://spda-buco.onrender.com/api/dashboard');
         
         if (!res.ok) throw new Error("Erro na rede");
         

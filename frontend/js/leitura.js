@@ -99,7 +99,7 @@ class QRCodeScanner {
         try {
             // Bate na sua API para verificar se o ponto existe
             // ATENÇÃO: Certifique-se de que essa rota existe no seu backend!
-            const res = await fetch(`http://localhost:3000/api/pontos/buscar-codigo/${codigo}`);
+            const res = await fetch(`https://spda-buco.onrender.com/api/pontos/buscar-codigo/${codigo}`);
 
             if (res.ok) {
                 const ponto = await res.json();

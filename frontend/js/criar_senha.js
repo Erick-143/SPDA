@@ -47,7 +47,7 @@ function mostrarMensagem(texto, tipo) {
         btnSalvar.textContent = 'Salvando...';
 
         try {
-            const res = await fetch('http://localhost:3000/api/auth/criar-senha', {
+            const res = await fetch('https://spda-buco.onrender.com/api/auth/criar-senha', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

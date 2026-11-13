@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function carregarPontos() {
     try {
-        const res = await fetch('http://localhost:3000/api/pontos');
+        const res = await fetch('https://spda-buco.onrender.com/api/pontos');
         listaDePontos = await res.json();
 
         const select = document.getElementById('ponto_spda');
@@ -108,7 +108,7 @@ async function salvarInspecao(e) {
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/inspecoes', {
+        const res = await fetch('https://spda-buco.onrender.com/api/inspecoes', {
             method: 'POST',
             body: formData
         });

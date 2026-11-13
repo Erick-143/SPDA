@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. Busca os dados reais do seu backend (Prisma)
 async function buscarPontosDoBanco() {
     try {
-        const res = await fetch('http://localhost:3000/api/pontos');
+        const res = await fetch('https://spda-buco.onrender.com/api/pontos');
         
         if (!res.ok) {
             throw new Error('Erro na resposta da API');
@@ -145,7 +145,7 @@ async function inativarPonto(id, codigo) {
     if (!confirmar) return;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/pontos/${id}/inativar`, { method: 'PUT' });
+        const res = await fetch(`https://spda-buco.onrender.com/api/pontos/${id}/inativar`, { method: 'PUT' });
         if (res.ok) {
             alert('Ponto removido com sucesso!');
             buscarPontosDoBanco(); // Recarrega a tela
