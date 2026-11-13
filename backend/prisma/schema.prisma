@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -13,11 +13,11 @@ model area {
   unidade_id  Int
   nome        String        @db.VarChar(250)
   sigla       String        @db.VarChar(10)
-    ativo       Boolean       @default(true)
+  ativo       Boolean       @default(true)
   unidade     unidade       @relation(fields: [unidade_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "area_ibfk_1")
   pontos_spda pontos_spda[]
 
-  @@index([unidade_id], map: "unidade_id")
+  @@index([unidade_id], map: "idx_area_unidade_id")
 }
 
 model cliente {
@@ -30,25 +30,25 @@ model cliente {
 }
 
 model inspecoes {
-  id                      Int         @id @default(autoincrement())
-  ponto_id                Int
-  usuario_id              Int
-  data_inspecao           DateTime    @default(now()) @db.DateTime(0)
-  condicao_visual         String?     @db.VarChar(100)
-  continuidade_eletrica   Decimal?    @db.Decimal(10, 2)
-  resistencia_aterramento Decimal?    @db.Decimal(10, 2)
-  oxidacao                Boolean?
-  necessidade_correcao    Boolean?
-  conformidade            Boolean?
-  observacoes             String?     @db.Text
+  id                    Int         @id @default(autoincrement())
+  ponto_id              Int
+  usuario_id            Int
+  data_inspecao         DateTime    @default(now())
+  condicao_visual       String?     @db.VarChar(100)
+  continuidade_eletrica Decimal?    @db.Decimal(10, 2)
+  resistencia_aterramento Decimal?  @db.Decimal(10, 2)
+  oxidacao              Boolean?
+  necessidade_correcao  Boolean?
+  conformidade          Boolean?
+  observacoes           String?     @db.Text
 
-  foto_url                String?     @db.VarChar(255)
+  foto_url              String?     @db.VarChar(255)
 
-  pontos_spda             pontos_spda @relation(fields: [ponto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspecoes_ibfk_1")
-  usuarios                usuarios    @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "inspecoes_ibfk_2")
+  pontos_spda           pontos_spda @relation(fields: [ponto_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "inspecoes_ibfk_1")
+  usuarios              usuarios    @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "inspecoes_ibfk_2")
 
-  @@index([ponto_id], map: "ponto_id")
-  @@index([usuario_id], map: "usuario_id")
+  @@index([ponto_id], map: "idx_inspecoes_ponto_id")
+  @@index([usuario_id], map: "idx_inspecoes_usuario_id")
 }
 
 model pontos_spda {
@@ -65,7 +65,7 @@ model pontos_spda {
   observacoes   String?     @db.Text
   inspecoes     inspecoes[]
 
-  unidade_id    Int                           // Relacionamento direto exigido (RF6)
+  unidade_id    Int                             // Relacionamento direto exigido (RF6)
   foto_url      String?     @db.VarChar(255)  // Foto de referência do ponto (RF6)
   qr_code_url   String?     @db.VarChar(255)  // Caminho do arquivo de imagem do QRCode gerado (RF7)
 
@@ -76,10 +76,10 @@ model pontos_spda {
   tipo_ponto    tipo_ponto  @relation(fields: [tipo_ponto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pontos_spda_ibfk_3")
 
   // ADICIONAR INDEX (coloque junto com os outros @@index no final do model):
-  @@index([unidade_id], map: "unidade_id")
-  @@index([area_id], map: "area_id")
-  @@index([cliente_id], map: "cliente_id")
-  @@index([tipo_ponto_id], map: "tipo_ponto_id")
+  @@index([unidade_id], map: "idx_pontos_spda_unidade_id")
+  @@index([area_id], map: "idx_pontos_spda_area_id")
+  @@index([cliente_id], map: "idx_pontos_spda_cliente_id")
+  @@index([tipo_ponto_id], map: "idx_pontos_spda_tipo_ponto_id")
 }
 
 model tipo_ponto {
@@ -93,13 +93,13 @@ model tipo_ponto {
 model unidade {
   id         Int     @id @default(autoincrement())
   cliente_id Int 
-    ativo       Boolean       @default(true)
+  ativo      Boolean       @default(true)
   nome       String  @db.VarChar(250)
   area       area[]
-    pontos_spda pontos_spda[] // Relação espelho indicando que a unidade terá vários pontos
+  pontos_spda pontos_spda[] // Relação espelho indicando que a unidade terá vários pontos
   cliente    cliente @relation(fields: [cliente_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "unidade_ibfk_1")
 
-  @@index([cliente_id], map: "cliente_id")
+  @@index([cliente_id], map: "idx_unidade_cliente_id")
 }
 
 model usuarios {
@@ -110,4 +110,3 @@ model usuarios {
   perfil    String      @db.VarChar(50)
   inspecoes inspecoes[]
 }
-
