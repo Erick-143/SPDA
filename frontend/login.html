@@ -83,7 +83,7 @@
 
             try {
                 // Pergunta para a nossa API enviando o TOKEN SEGURO do Google
-                const res = await fetch('http://localhost:3000/api/auth/login-google', {
+                const res = await fetch('https://spda-buco.onrender.com/api/auth/login-google', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ token: response.credential })
@@ -132,7 +132,7 @@
 
             try {
                 // Envia para a nossa rota tradicional que usa o bcryptjs
-                const res = await fetch('http://localhost:3000/api/auth/login-tradicional', {
+                const res = await fetch('https://spda-buco.onrender.com/api/auth/login-tradicional', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, senhaDigitada: senha })

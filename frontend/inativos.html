@@ -152,7 +152,7 @@
             const renderInativosCli = document.getElementById('clientes-inativos-render');
             async function carregarClientesInativos() {
                 try {
-                    const res = await fetch('http://localhost:3000/api/clientes/inativos');
+                    const res = await fetch('https://spda-buco.onrender.com/api/clientes/inativos');
                     const clientes = await res.json();
                     renderInativosCli.innerHTML = clientes.length ? '' : '<p>Lixeira vazia.</p>';
                     
@@ -177,7 +177,7 @@
             }
 
             window.reativarCliente = async function(id) {
-                const resImpacto = await fetch(`http://localhost:3000/api/clientes/${id}/impacto`);
+                const resImpacto = await fetch(`https://spda-buco.onrender.com/api/clientes/${id}/impacto`);
                 const impacto = await resImpacto.json();
                 
                 const mensagem = ` Deseja reativar este Cliente?\n\nAo reativar este cliente, você também trará de volta ao sistema:\n` +
@@ -187,7 +187,7 @@
 
                 if(!confirm(mensagem)) return;
 
-                const res = await fetch(`http://localhost:3000/api/clientes/${id}/reativar`, { method: 'PUT' });
+                const res = await fetch(`https://spda-buco.onrender.com/api/clientes/${id}/reativar`, { method: 'PUT' });
                 if(res.ok) { 
                     mostrarFeedback("Cliente restaurado!"); 
                     carregarClientesInativos(); 
@@ -197,7 +197,7 @@
             const renderInativosUni = document.getElementById('unidades-inativas-render');
             async function carregarUnidadesInativas() {
                 try {
-                    const res = await fetch('http://localhost:3000/api/unidades/inativos');
+                    const res = await fetch('https://spda-buco.onrender.com/api/unidades/inativos');
                     const unidades = await res.json();
                     renderInativosUni.innerHTML = unidades.length ? '' : '<p>Lixeira vazia.</p>';
                     
@@ -221,7 +221,7 @@
             }
 
             window.reativarUnidade = async function(id) {
-                const resImpacto = await fetch(`http://localhost:3000/api/unidades/${id}/impacto`);
+                const resImpacto = await fetch(`https://spda-buco.onrender.com/api/unidades/${id}/impacto`);
                 const impacto = await resImpacto.json();
                 
                 const mensagem = ` Deseja reativar esta Unidade?\n\nAo reativar esta unidade, você também trará de volta:\n` +
@@ -230,7 +230,7 @@
 
                 if(!confirm(mensagem)) return;
 
-                const res = await fetch(`http://localhost:3000/api/unidades/${id}/reativar`, { method: 'PUT' });
+                const res = await fetch(`https://spda-buco.onrender.com/api/unidades/${id}/reativar`, { method: 'PUT' });
                 if(res.ok) { 
                     mostrarFeedback("Unidade restaurada!"); 
                     carregarUnidadesInativas(); 
@@ -241,7 +241,7 @@
             const renderInativosArea = document.getElementById('areas-inativas-render');
             async function carregarAreasInativas() {
                 try {
-                    const res = await fetch('http://localhost:3000/api/areas/inativos');
+                    const res = await fetch('https://spda-buco.onrender.com/api/areas/inativos');
                     const areas = await res.json();
                     renderInativosArea.innerHTML = areas.length ? '' : '<p>Lixeira vazia.</p>';
                     
@@ -266,7 +266,7 @@
             }
 
             window.reativarArea = async function(id) {
-                const resImpacto = await fetch(`http://localhost:3000/api/areas/${id}/impacto`);
+                const resImpacto = await fetch(`https://spda-buco.onrender.com/api/areas/${id}/impacto`);
                 const impacto = await resImpacto.json();
                 
                 const mensagem = ` Deseja reativar esta Área?\n\nAo reativar esta área, você também trará de volta:\n` +
@@ -274,7 +274,7 @@
 
                 if(!confirm(mensagem)) return;
 
-                const res = await fetch(`http://localhost:3000/api/areas/${id}/reativar`, { method: 'PUT' });
+                const res = await fetch(`https://spda-buco.onrender.com/api/areas/${id}/reativar`, { method: 'PUT' });
                 if(res.ok) { 
                     mostrarFeedback("Área restaurada!"); 
                     carregarAreasInativas(); 
@@ -285,7 +285,7 @@
             const renderInativosTipo = document.getElementById('tipos-inativos-render');
             async function carregarTiposInativos() {
                 try {
-                    const res = await fetch('http://localhost:3000/api/tipos/inativos');
+                    const res = await fetch('https://spda-buco.onrender.com/api/tipos/inativos');
                     const tipos = await res.json();
                     renderInativosTipo.innerHTML = tipos.length ? '' : '<p>Lixeira vazia.</p>';
                     
@@ -310,7 +310,7 @@
 
             window.reativarTipo = async function(id) {
                 if(!confirm("Deseja reativar este tipo?")) return;
-                const res = await fetch(`http://localhost:3000/api/tipos/${id}/reativar`, { method: 'PUT' });
+                const res = await fetch(`https://spda-buco.onrender.com/api/tipos/${id}/reativar`, { method: 'PUT' });
                 if(res.ok) { mostrarFeedback("Tipo restaurado!"); carregarTiposInativos(); }
             };
 
@@ -318,7 +318,7 @@
             const renderInativosPonto = document.getElementById('pontos-inativos-render');
             async function carregarPontosInativos() {
                 try {
-                    const res = await fetch('http://localhost:3000/api/pontos/inativos');
+                    const res = await fetch('https://spda-buco.onrender.com/api/pontos/inativos');
                     const pontos = await res.json();
                     renderInativosPonto.innerHTML = pontos.length ? '' : '<p>Lixeira vazia.</p>';
                     
@@ -344,7 +344,7 @@
 
             window.reativarPonto = async function(id) {
                 if(!confirm("Deseja reativar este ponto de SPDA?")) return;
-                const res = await fetch(`http://localhost:3000/api/pontos/${id}/reativar`, { method: 'PUT' });
+                const res = await fetch(`https://spda-buco.onrender.com/api/pontos/${id}/reativar`, { method: 'PUT' });
                 if(res.ok) { mostrarFeedback("Ponto restaurado!"); carregarPontosInativos(); }
             };
 
